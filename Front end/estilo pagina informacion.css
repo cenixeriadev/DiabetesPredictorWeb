@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+  
+    background-color: #6fa3c4a9;
+    color:#050505
+  }
+  
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, #4465a7, #7c92b4);
+    
+  }
+  
+  .Logo{
+    font-weight: bold;
+    font-size: 24px;
+    color:white;
+    text-shadow: 5px 4px 10px rgba(0,0,0,0.5);
+  }
+  
+  .Titulo{
+    position: absolute;
+    top: 20px;
+    left:70px;
+    font-size: 10px;
+    width: 250px;
+    color:white;
+  
+  
+  }
+  
+  nav a , .Menu a{
+    color:white;
+  }
+  
+  nav a, .Login a{
+    color:white;
+  }

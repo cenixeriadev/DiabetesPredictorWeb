@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/*Todo lo que contendra la pagina, general*/
+
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #4cc2fa, #bdd6dc);
+}
+
+.container {
+    position: relative; 
+    width: 480px;
+    height: 660px; 
+    background: #ffff;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rbgba(0, 0, 0, .2);
+    margin: 20px;
+    overflow: hidden;
+}
+
+/* El diseño de todo el formulario*/
+.form-box{
+    color: black;
+    position: relative;
+    right: -25.7px;
+    width: 92%;
+    height: 60%;
+}
+
+/*El mismo formulario hecho en html*/
+form {
+    width: 100%;
+}
+
+/* Solo letras */
+.container h1 {
+    font-size: 41px;
+    /*margin(Top, Right, Bottom, left)*/
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+}
+
+.container p {
+    font-size: 14.5px; 
+    /*margin(Top, Right, Bottom, left)*/
+    margin: 13px 30px;
+}
+
+.container h3 {
+    font-size: 15px;
+    /*margin(Top, Right, Bottom, left)*/
+    margin: 21px 0px 0px 0px;
+}
+
+/* Partes del input */
+.input-box {
+    position: relative;
+    width: 80%;
+    margin: 0px 0px 0px 45px; 
+}
+
+/* Diseño de solamente el apartado donde se inserta los datos */
+.input-box input{
+    width:100%;
+    padding: 13px 50px 13px 20px;
+    background: #eee;
+    border-radius: 8px;
+    border: none; 
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+    display: block;
+    /*margin(Top, Right, Bottom, left)*/
+    margin: 12px 0px 15px 0px ;
+}
+
+/*Para las letras que estan dentro del input*/
+.input-box input::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+
+/*Solo para el icono, ojo, cuando el icono ya esta dentro del 
+diseño del input, automaticamente, se modifica */
+.input-box i {
+    position: absolute; 
+    right: -12px;
+    top: 17.8%;
+    transform: translate(-70%);
+    font-size: 30px; 
+    color: #888;
+}
+
+.logo-img {
+    display: block;
+    margin: 41px auto 14px auto;
+    width: 84px;
+    height: 80px;
+}
+
+/*Se creo un div para manipular mejor los botones dentro de un campo*/
+.button-container {  
+  position: relative;
+  width: 100%;
+  height: 100px; 
+  margin-top: 30px;
+}
+
+/* Boton yes de vidrio*/
+.btn-glass1 {
+    position: absolute;
+    top: 10px;
+    left: 23%;
+    width: 90px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+/* Hover con gradiente*/
+.btn-glass1:hover {
+    background: linear-gradient(135deg, #4cc2fa, skyblue);
+    color: white;
+    box-shadow: 0 0 18px rgba(128, 222, 234, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Efecto visual cuando el botón se presiona (clic) o toma foco por tabulación */
+.button-container .btn-glass1:active, .btn-glass1:focus {
+    background: linear-gradient(135deg, #4cc2fa, skyblue);
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 20px rgba(162, 230, 255, 0.6);
+    transform: scale(0.98);
+}
+
+/*Boton No*/
+.btn-glass2 {
+    position: absolute;
+    top: 10px;
+    left: 55%; /* Puedes cambiar este valor para mover el botón horizontalmente */
+    width: 90px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    /*margin(Top, Right, Bottom, left)*/
+    margin: 10px 40px 50p 10px;
+}
+
+.btn-glass2:hover {
+    background: linear-gradient(135deg, #4cc2fa, skyblue);
+    color: white;
+    box-shadow: 0 0 18px rgba(128, 222, 234, 0.5);
+    transform: translateY(-2px);
+    background-size: 300% 300%;
+    animation: gradientMove 3s ease infinite;
+}
+
+/* Efecto visual cuando el botón se presiona o toma foco */
+.btn-glass2:active, .btn-glass2:focus {
+    background: linear-gradient(135deg,#4cc2fa, skyblue);
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 20px rgba(162, 230, 255, 0.6);
+    transform: scale(0.98);
+}
+
+/* Boton BACK VIDRIO ANIMADO */ 
+.back-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #000;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg,#4cc2fa , skyblue);
+    color: white;
+    transform: translateY(-2px);
+    background-size: 300% 300%;
+    animation: gradientMove 3s ease infinite;
+    box-shadow: 0 0 18px rgba(128, 222, 234, 0.5);
+}
+
+.back-btn:active, .back-btn:focus {
+    background: linear-gradient(135deg,#4cc2fa, skyblue);
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 20px rgba(162, 230, 255, 0.6);
+    transform: scale(0.98);
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

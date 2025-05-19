@@ -26,12 +26,12 @@
                 </div>
                 <p>Or use your email and password</p>
                 <div class ="input-box">
-                    <input type="text" placeholder="Username" required>
+                    <input id = "username" type="text" placeholder="Username" required>
                     <!-- Esto es solo para el icono-->
                     <i class='bx bxs-user'></i>
                 </div>
-                <div class = "input-box">
-                    <input type="password" placeholder="Password" required>
+                <div  class= "input-box">
+                    <input id= "password" type="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt' style='color:black' ></i>
                 </div>
                 <div class="forgot-link">
@@ -40,8 +40,17 @@
                 <button type = "btn" class = "btn" onclick="redirigir()">Sign in</button>
                 <script>
                     function redirigir() {
-                        localStorage.setItem("logueado", "true");
-                        window.location.href = "../Proyecto Pagina Web/Pagina Inicio.html";
+                        const username = document.getElementById("username").value;
+                        const password = document.getElementById("password").value;
+
+                        if (username == "Me" && password == "") {
+                            localStorage.setItem("logueado", "true");
+                            window.location.href = "../Proyecto Pagina Web/Pagina Inicio.html";
+                        } else {
+                            alert("Usuario o contraseña incorrectos");
+                        
+                        }
+                        
                     }
                 </script>
             </form>

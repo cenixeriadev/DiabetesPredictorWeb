@@ -14,7 +14,7 @@
         <a href="../Proyecto Pagina Web/Pagina Inicio.html">Inicio</a>
         <a href="../Pagina Informacion.html">Información</a>
         <a href="../Proyecto Pagina Web/Pagina Evaluacion.html">Evaluación</a>
-        <a href="../Login_usuario/index.html" class="login">Login/Registro</a>
+        <a id="login-link" href="../Login_usuario/index.html" class="login">Login/Registro</a>
       </nav>
     </header>
 
@@ -29,5 +29,16 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const loginLink = document.getElementById("login-link");
+
+                  // Si el usuario está logueado, cambiamos el enlace
+      if (localStorage.getItem("logueado") === "true") {
+        loginLink.href = "ProfileInformation.html";
+        loginLink.innerHTML = "Usuario"; // Ícono de usuario
+      }
+    });
+  </script>
 </body>
 </html>

@@ -25,7 +25,7 @@ export default function Headerprincipal() {
             <div className={`MenuContainer ${menuOpen ? 'open' : ''}`}>
                 <nav className="Menu">
                     <Link to="/Home" onClick={() => setMenuOpen(false)}>Inicio</Link>
-                    <Link to="/Informacion" onClick={() => setMenuOpen(false)}>Información</Link>
+                    <Link to="./Pag_Informacion" onClick={() => setMenuOpen(false)}>Información</Link>
                     <Link to="/Evaluation" onClick={() => setMenuOpen(false)}>Evaluacion</Link>
                 </nav>
                 <nav className="Login">

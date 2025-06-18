@@ -1,0 +1,343 @@
+/* Reset y base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Placeholders para imágenes */
+.image-placeholder {
+    background: linear-gradient(135deg,rgb(70, 122, 122) 0%,rgb(60, 97, 135) 50%,rgb(83, 107, 142) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg,rgb(117, 160, 169) 0%, #f0f8f0 100%);
+    padding: 80px 0;
+    min-height: 60vh;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    color:rgb(53, 102, 103);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color:rgb(46, 90, 126);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Symptoms Section */
+.symptoms-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color:rgb(48, 94, 132);
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.content-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.symptoms-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.symptoms-list li {
+    padding: 12px 0;
+    padding-left: 30px;
+    position: relative;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.symptoms-list li::before {
+    content: "●";
+    color:rgb(103, 148, 165);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: 8px;
+}
+
+.image-content .image-placeholder {
+    width: 100%;
+    height: 300px;
+}
+
+/* Types Section */
+.types-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.types-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.type-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.type-card:hover {
+    transform: translateY(-5px);
+}
+
+.type-card .image-placeholder {
+    width: 100%;
+    height: 200px;
+    border-radius: 0;
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    color:rgb(71, 133, 219);
+    margin-bottom: 15px;
+}
+
+.card-content p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Management Section */
+.management-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.management-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.management-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.management-item .image-placeholder {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 20px;
+}
+
+.management-item h4 {
+    font-size: 1.3rem;
+    color:rgb(59, 105, 138);
+    margin-bottom: 15px;
+}
+
+.management-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Tools Section */
+.tools-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.tools-content {
+    margin-top: 50px;
+}
+
+.tool-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.tool-row.reverse {
+    direction: rtl;
+}
+
+.tool-row.reverse > * {
+    direction: ltr;
+}
+
+.tool-row .image-placeholder {
+    width: 100%;
+    height: 250px;
+}
+
+.tool-info h3 {
+    font-size: 1.8rem;
+    color:rgb(58, 122, 146);
+    margin-bottom: 20px;
+}
+
+.tool-info p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Medical Section */
+.medical-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg,rgb(117, 160, 169) 0%, #f0f8f0 100%);
+}
+
+.medical-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.medical-text h2 {
+    font-size: 2.2rem;
+    color:rgb(55, 103, 129);
+    margin-bottom: 25px;
+}
+
+.medical-text p {
+    font-size: 1.1rem;
+    color:rgb(34, 91, 107);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.medical-points {
+    space-y: 15px;
+}
+
+.point {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(44, 85, 48, 0.1);
+}
+
+.point:last-child {
+    border-bottom: none;
+}
+
+.point strong {
+    color:rgb(37, 97, 113);
+    font-size: 1.1rem;
+}
+
+.medical-image .image-placeholder {
+    width: 100%;
+    height: 350px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content,
+    .content-row,
+    .tool-row,
+    .medical-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .types-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .management-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .tool-row.reverse {
+        direction: ltr;
+    }
+    
+    .hero-section {
+        padding: 50px 0;
+    }
+    
+    .symptoms-section,
+    .types-section,
+    .management-section,
+    .tools-section,
+    .medical-section {
+        padding: 50px 0;
+    }
+}

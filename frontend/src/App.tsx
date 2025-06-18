@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Pag_Informacion from './pages/Pag_Informacion';
 import Footerprincipal from './components/footer';
 import Pag_Evaluacion from './pages/Pag_Evaluacion';
+import Login from './pages/Login';
 export default function App() {
   return (
     <BrowserRouter>
@@ -13,8 +14,9 @@ export default function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Pag_Informacion" element={<Pag_Informacion/>} />
         <Route path="/Pag_Evaluacion" element={<Pag_Evaluacion/>} />
+        <Route path="/Login" element={<Login/>} />
       </Routes>
       <Footerprincipal />
-    </BrowserRouter>
+    </BrowserRouter>  
   );
 }

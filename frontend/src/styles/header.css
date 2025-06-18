@@ -16,7 +16,7 @@ header {
     z-index: 100;
     display: flex;
     margin: 0;
-    min-height: 60px;
+    min-height: 90px;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(230, 230, 230);

@@ -1,17 +1,17 @@
 import "../styles/Pag_Informacion.css";
 import { Link } from 'react-router-dom';
-import imagen1 from "../assets/imagenes_info/imagen1.jpg";
-import imagen2 from "../assets/imagenes_info/imagen2.jpg";
-import imagen3 from "../assets/imagenes_info/imagen3.jpg";
-import imagen4 from "../assets/imagenes_info/imagen4.jpg";
-import imagen5 from "../assets/imagenes_info/imagen5.jpg";
-import imagen6 from "../assets/imagenes_info/imagen6.jpg";
-import imagen7 from "../assets/imagenes_info/imagen7.jpg";
-import imagen8 from "../assets/imagenes_info/imagen8.jpg";
-import imagen9 from "../assets/imagenes_info/imagen9.jpg";
-import imagen10 from "../assets/imagenes_info/imagen10.jpg";
-import imagen11 from "../assets/imagenes_info/imagen11.png";
-import imagen12 from "../assets/imagenes_info/imagen12.png";
+import imagen1 from "../assets/imagenes_info/imagen_iny.jpg";
+import imagen2 from "../assets/imagenes_info/imagen_sugar.png";
+import imagen3 from "../assets/imagenes_info/imagen_blood.jpg";
+import imagen4 from "../assets/imagenes_info/imagen_prue.jpg";
+import imagen5 from "../assets/imagenes_info/imagen_idk.jpg";
+import imagen6 from "../assets/imagenes_info/imagenxd.jpg";
+import imagen7 from "../assets/imagenes_info/imagengreen.jpg";
+import imagen8 from "../assets/imagenes_info/imagen_messure_blood.jpg";
+import imagen9 from "../assets/imagenes_info/imagen_tf.jpg";
+import imagen10 from "../assets/imagenes_info/imagennmms.jpg";
+import imagen11 from "../assets/imagenes_info/imagenbro.png";
+import imagen12 from "../assets/imagenes_info/imagenkk.png";
 
 
 function Pag_Informacion() {

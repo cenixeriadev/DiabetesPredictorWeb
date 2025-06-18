@@ -26,7 +26,7 @@ export default function Headerprincipal() {
                 <nav className="Menu">
                     <Link to="/Home" onClick={() => setMenuOpen(false)}>Inicio</Link>
                     <Link to="./Pag_Informacion" onClick={() => setMenuOpen(false)}>Información</Link>
-                    <Link to="/Evaluation" onClick={() => setMenuOpen(false)}>Evaluacion</Link>
+                    <Link to="/Pag_Evaluacion" onClick={() => setMenuOpen(false)}>Evaluacion</Link>
                 </nav>
                 <nav className="Login">
                     {isLoggedIn ? (

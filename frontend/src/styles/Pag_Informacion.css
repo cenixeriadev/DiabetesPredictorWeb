@@ -276,7 +276,9 @@ body {
 }
 
 .medical-points {
-    space-y: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .point {

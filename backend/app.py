@@ -26,7 +26,7 @@ def create_app():
     # Configurar CORS
     frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
     CORS(app, 
-         origins="*",
+         origins="*",#TODO: cambiar al verdadero frontend_url en producción
          supports_credentials=True,
          allow_headers=['Content-Type', 'Authorization'],
          methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])

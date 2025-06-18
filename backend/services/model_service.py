@@ -1,0 +1,181 @@
+import joblib
+import numpy as np
+import pandas as pd
+from pathlib import Path
+import os
+from typing import Dict, Any, Optional
+
+class ModelService:
+    def __init__(self):
+        self.model = None
+        self.scaler = None
+        self.model_path = None
+        self.scaler_path = None
+        self.load_model()
+        self.load_scaler()
+    
+    def load_scaler(self):
+        """
+        Carga el scaler desde la carpeta models.
+        Busca automáticamente archivos .pkl o .joblib en la carpeta.
+        """
+        models_dir = Path(__file__).parent.parent / "models"
+        
+        if not models_dir.exists():
+            raise FileNotFoundError(f"La carpeta models no existe: {models_dir}")
+        
+        # Buscar archivos de scaler
+        scaler_files = list(models_dir.glob("scaler_*.pkl")) + list(models_dir.glob("scaler_*.joblib"))
+        
+        if not scaler_files:
+            raise FileNotFoundError("No se encontraron archivos de scaler (.pkl o .joblib) en la carpeta models")
+        
+        # Tomar el primer scaler encontrado
+        self.scaler_path = scaler_files[0]
+        
+        try:
+            self.scaler = joblib.load(self.scaler_path)
+            print(f"Scaler cargado exitosamente desde: {self.scaler_path}")
+        except Exception as e:
+            raise Exception(f"Error al cargar el scaler: {str(e)}")
+    
+    def load_model(self):
+        """
+        Carga el modelo de machine learning desde la carpeta models.
+        Busca automáticamente archivos .pkl o .joblib en la carpeta.
+        """
+        models_dir = Path(__file__).parent.parent / "models"
+        
+        if not models_dir.exists():
+            raise FileNotFoundError(f"La carpeta models no existe: {models_dir}")
+        
+        # Buscar archivos de modelo
+        model_files = list(models_dir.glob("*.pkl")) + list(models_dir.glob("*.joblib"))
+        
+        if not model_files:
+            raise FileNotFoundError("No se encontraron archivos de modelo (.pkl o .joblib) en la carpeta models")
+        
+        # Tomar el primer modelo encontrado
+        self.model_path = model_files[0]
+        
+        try:
+            self.model = joblib.load(self.model_path)
+            print(f"Modelo cargado exitosamente desde: {self.model_path}")
+        except Exception as e:
+            raise Exception(f"Error al cargar el modelo: {str(e)}")
+    
+    def predict(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Realiza una predicción usando el modelo cargado.
+        
+        Args:
+            data: Diccionario con los datos de entrada
+            
+        Returns:
+            Diccionario con la predicción y probabilidad (si está disponible)
+        """
+        if self.model is None:
+            raise Exception("No hay modelo cargado")
+        
+        try:
+            # Convertir los datos a formato adecuado para el modelo
+            features = self._prepare_features(data)
+            
+            # Realizar predicción
+            prediction = self.model.predict(features)
+            
+            # Obtener probabilidades si el modelo las soporta
+            try:
+                probabilities = self.model.predict_proba(features)[:, 1]
+                probability = float(np.max(probabilities))
+            except AttributeError:
+                probability = None
+            
+            # Interpretar la predicción
+            prediction_label = self._interpret_prediction(prediction[0])
+            
+            return {
+                'prediccion': prediction_label,
+                'probabilidad': probability,
+                'raw_prediction': int(prediction[0]) if isinstance(prediction[0], (int, np.integer)) else float(prediction[0])
+            }
+            
+        except Exception as e:
+            raise Exception(f"Error en la predicción: {str(e)}")
+    
+    def _prepare_features(self, data: Dict[str, Any]) -> np.ndarray:
+        """
+        Prepara las características para el modelo.
+        Ajusta este método según las características que espere tu modelo.
+        """
+        # Orden de características esperado por el modelo
+        # Ajusta según tu modelo específico
+        
+        
+        feature_order = [
+            'pregnancies', 'glucose', 'blood_pressure',
+            'insulin', 'bmi', 'diabetes_pedigree_function', 'age'
+        ]
+        
+        # Extraer características en el orden correcto
+        features = []
+        for feature in feature_order:
+            if feature in data:
+                features.append(float(data[feature]))
+            else:
+                # Valor por defecto si la característica no está presente
+                features.append(0.0)
+        
+        # Convertir a array numpy y redimensionar
+        features_array = np.array(features).reshape(1, -1)
+        
+        # Aplicar el scaler si está cargado
+        if self.scaler is not None:
+            try:
+                features_array = self.scaler.transform(features_array)
+                print("Features escaladas correctamente")
+            except Exception as e:
+                raise Exception(f"Error al escalar características: {str(e)}")
+        else:
+            print("Advertencia: No se aplicó escalado (scaler no cargado)")
+        
+        return features_array
+    
+    def _interpret_prediction(self, prediction) -> str:
+        """
+        Interpreta la predicción del modelo en un formato legible.
+        Ajusta según tu modelo específico.
+        """
+        if isinstance(prediction, (int, np.integer)):
+            return "Diabetes" if prediction == 1 else "No Diabetes"
+        elif isinstance(prediction, (float, np.floating)):
+            return "Diabetes" if prediction > 0.5 else "No Diabetes"
+        else:
+            return str(prediction)
+    
+    def get_model_info(self) -> Dict[str, Any]:
+        """
+        Retorna información sobre el modelo cargado.
+        """
+        if self.model is None:
+            return {"error": "No hay modelo cargado"}
+        
+        info = {
+            "model_path": str(self.model_path),
+            "model_type": type(self.model).__name__,
+            "loaded": True
+        }
+        
+        # Agregar información específica del modelo si está disponible
+        try:
+            if hasattr(self.model, 'feature_names_in_'):
+                info["features"] = list(self.model.feature_names_in_)
+            if hasattr(self.model, 'n_features_in_'):
+                info["n_features"] = self.model.n_features_in_
+        except:
+            pass
+        
+        return info
+
+# Instancia global del servicio de modelo
+model_service = ModelService()

@@ -1,0 +1,138 @@
+nav a {
+    text-decoration: none;
+    margin: 15px;
+    color: black;
+}
+
+nav a:hover {
+    color: rgb(102, 55, 160);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
+    display: flex;
+    margin: 0;
+    min-height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(230, 230, 230);
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.LogoContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    gap: 12px;
+}
+
+.Logo {
+    color: rgb(47, 20, 79);
+    font-size: 32px;
+    text-shadow: 2px 2px 5px rgba(3, 3, 3, 0.447);
+}
+
+.Titulo {
+    color: rgb(47, 20, 79);
+    font-size: 10px;
+    width: 250px;
+    word-break: break-word;
+}
+
+.MenuContainer {
+    color: rgb(47, 20, 79);
+    display: flex;
+    align-items: center;
+    margin-right: 10%;
+}
+
+.Menu {
+    color: rgb(47, 20, 79);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.Login {
+    background-color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.Login a {
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+@media (max-width: 800px) {
+    header {
+        flex-direction: column;
+        padding-bottom: 5px;
+        align-items: stretch;
+    }
+    .LogoContainer {
+        justify-content: center;
+        margin-left: 10px;
+    }
+    .Titulo {
+        font-size: 9px;
+        width: 90vw;
+        max-width: 320px;
+        text-align: center;
+    }
+    .MenuContainer {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background: rgb(231, 231, 231);
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        padding: 1rem 0 0.5rem 0;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .MenuContainer.open {
+        display: flex;
+    }
+    .Menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        position: static;
+        box-shadow: none;
+        padding: 0;
+    }
+    .Login {
+        display: block;
+        margin-top: 10px;
+        align-self: center;
+        background: rgba(0,0,0,0.95);
+    }
+    .menu-toggle {
+        display: block;
+        margin-right: 30px;
+        margin-top: 10px;
+    }
+}

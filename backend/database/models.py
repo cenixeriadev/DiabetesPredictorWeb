@@ -7,7 +7,7 @@ db = SQLAlchemy()
 class Usuario(db.Model):
     __tablename__ = 'usuario'
     
-    ID_usuario = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     correo = db.Column(db.String(100), unique=True, nullable=False)
     contrasena = db.Column(db.String(255), nullable=False)
@@ -39,10 +39,10 @@ class Usuario(db.Model):
 class Cuestionario(db.Model):
     __tablename__ = 'cuestionario'
     
-    ID_cuestionario = db.Column(db.Integer, primary_key=True)
+    id_cuestionario = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.Date, nullable=False, default=datetime.utcnow)
     hora = db.Column(db.Time, nullable=False, default=datetime.utcnow().time)
-    ID_usuario = db.Column(db.Integer, db.ForeignKey('usuario.ID_usuario'), nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=False)
     
     # Relaciones
     resultados = db.relationship('Resultado', backref='cuestionario', lazy=True)
@@ -50,16 +50,16 @@ class Cuestionario(db.Model):
     
     def to_dict(self):
         return {
-            'ID_cuestionario': self.ID_cuestionario,
+            'id_cuestionario': self.id_cuestionario,
             'fecha': self.fecha.isoformat() if self.fecha else None,
             'hora': self.hora.isoformat() if self.hora else None,
-            'ID_usuario': self.ID_usuario
+            'id_usuario': self.id_usuario
         }
 
 class Pregunta(db.Model):
     __tablename__ = 'pregunta'
     
-    ID_pregunta = db.Column(db.Integer, primary_key=True)
+    id_pregunta = db.Column(db.Integer, primary_key=True)
     nom_pregunta = db.Column(db.String(255), nullable=False)
     
     # Relaciones
@@ -67,36 +67,36 @@ class Pregunta(db.Model):
     
     def to_dict(self):
         return {
-            'ID_pregunta': self.ID_pregunta,
+            'id_pregunta': self.id_pregunta,
             'nom_pregunta': self.nom_pregunta
         }
 
 class Respuesta(db.Model):
     __tablename__ = 'respuesta'
     
-    ID_respuesta = db.Column(db.Integer, primary_key=True)
+    id_respuesta = db.Column(db.Integer, primary_key=True)
     respuesta_str = db.Column(db.String(255), nullable=False)
-    ID_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.ID_cuestionario'), nullable=False)
-    ID_pregunta = db.Column(db.Integer, db.ForeignKey('pregunta.ID_pregunta'), nullable=False)
+    id_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.id_cuestionario'), nullable=False)
+    id_pregunta = db.Column(db.Integer, db.ForeignKey('pregunta.id_pregunta'), nullable=False)
     
     def to_dict(self):
         return {
-            'ID_respuesta': self.ID_respuesta,
+            'id_respuesta': self.id_respuesta,
             'respuesta_str': self.respuesta_str,
-            'ID_cuestionario': self.ID_cuestionario,
-            'ID_pregunta': self.ID_pregunta
+            'id_cuestionario': self.id_cuestionario,
+            'id_pregunta': self.id_pregunta
         }
 
 class Resultado(db.Model):
     __tablename__ = 'resultado'
     
-    ID_resultado = db.Column(db.Integer, primary_key=True)
+    id_resultado = db.Column(db.Integer, primary_key=True)
     prediccion = db.Column(db.String(50), nullable=False)
-    ID_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.ID_cuestionario'), nullable=False)
+    id_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.id_cuestionario'), nullable=False)
     
     def to_dict(self):
         return {
-            'ID_resultado': self.ID_resultado,
+            'id_resultado': self.id_resultado,
             'prediccion': self.prediccion,
-            'ID_cuestionario': self.ID_cuestionario
+            'id_cuestionario': self.id_cuestionario
         }

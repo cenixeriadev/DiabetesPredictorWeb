@@ -29,7 +29,7 @@ def predict_diabetes():
         nuevo_cuestionario = Cuestionario(
             fecha=datetime.now().date(),
             hora=datetime.now().time(),
-            ID_usuario=usuario_actual.ID_usuario
+            id_usuario=usuario_actual.id_usuario
         )
         db.session.add(nuevo_cuestionario)
         db.session.flush()  # Para obtener el ID sin hacer commit
@@ -40,7 +40,7 @@ def predict_diabetes():
         # Guardar resultado
         nuevo_resultado = Resultado(
             prediccion=prediction_result['prediccion'],
-            ID_cuestionario=nuevo_cuestionario.ID_cuestionario
+            id_cuestionario=nuevo_cuestionario.id_cuestionario
         )
         db.session.add(nuevo_resultado)
         
@@ -69,8 +69,8 @@ def predict_diabetes():
                     # Crear respuesta
                     respuesta = Respuesta(
                         respuesta_str=str(value),
-                        ID_cuestionario=nuevo_cuestionario.ID_cuestionario,
-                        ID_pregunta=pregunta.ID_pregunta
+                        id_cuestionario=nuevo_cuestionario.id_cuestionario,
+                        id_pregunta=pregunta.id_pregunta
                     )
                     db.session.add(respuesta)
         
@@ -80,7 +80,7 @@ def predict_diabetes():
         return jsonify({
             'prediccion': prediction_result['prediccion'],
             'probabilidad': prediction_result.get('probabilidad'),
-            'ID_cuestionario': nuevo_cuestionario.ID_cuestionario,
+            'id_cuestionario': nuevo_cuestionario.id_cuestionario,
             'fecha': nuevo_cuestionario.fecha.isoformat(),
             'hora': nuevo_cuestionario.hora.isoformat()
         }), 200
@@ -114,19 +114,19 @@ def get_prediction_history():
         
         # Obtener cuestionarios del usuario con sus resultados
         cuestionarios = db.session.query(Cuestionario, Resultado)\
-            .join(Resultado, Cuestionario.ID_cuestionario == Resultado.ID_cuestionario)\
-            .filter(Cuestionario.ID_usuario == usuario_actual.ID_usuario)\
+            .join(Resultado, Cuestionario.id_cuestionario == Resultado.id_cuestionario)\
+            .filter(Cuestionario.id_usuario == usuario_actual.id_usuario)\
             .order_by(Cuestionario.fecha.desc(), Cuestionario.hora.desc())\
             .all()
         
         historial = []
         for cuestionario, resultado in cuestionarios:
             historial.append({
-                'ID_cuestionario': cuestionario.ID_cuestionario,
+                'id_cuestionario': cuestionario.id_cuestionario,
                 'fecha': cuestionario.fecha.isoformat(),
                 'hora': cuestionario.hora.isoformat(),
                 'prediccion': resultado.prediccion,
-                'ID_resultado': resultado.ID_resultado
+                'id_resultado': resultado.id_resultado
             })
         
         return jsonify({
@@ -156,8 +156,8 @@ def get_cuestionario_detail(cuestionario_id):
         
         # Obtener cuestionario con verificación de pertenencia al usuario
         cuestionario = Cuestionario.query.filter_by(
-            ID_cuestionario=cuestionario_id,
-            ID_usuario=usuario_actual.ID_usuario
+            id_cuestionario=cuestionario_id,
+            id_usuario=usuario_actual.id_usuario
         ).first()
         
         if not cuestionario:
@@ -167,32 +167,32 @@ def get_cuestionario_detail(cuestionario_id):
         
         # Obtener respuestas del cuestionario
         respuestas = db.session.query(Respuesta, Pregunta)\
-            .join(Pregunta, Respuesta.ID_pregunta == Pregunta.ID_pregunta)\
-            .filter(Respuesta.ID_cuestionario == cuestionario_id)\
+            .join(Pregunta, Respuesta.id_pregunta == Pregunta.id_pregunta)\
+            .filter(Respuesta.id_cuestionario == cuestionario_id)\
             .all()
         
         # Obtener resultado
-        resultado = Resultado.query.filter_by(ID_cuestionario=cuestionario_id).first()
-        
+        resultado = Resultado.query.filter_by(id_cuestionario=cuestionario_id).first()
+
         respuestas_detalle = []
         for respuesta, pregunta in respuestas:
             respuestas_detalle.append({
                 'pregunta': pregunta.nom_pregunta,
                 'respuesta': respuesta.respuesta_str,
-                'ID_pregunta': pregunta.ID_pregunta
+                'id_pregunta': pregunta.id_pregunta
             })
         
         return jsonify({
             'cuestionario': {
-                'ID_cuestionario': cuestionario.ID_cuestionario,
+                'id_cuestionario': cuestionario.id_cuestionario,
                 'fecha': cuestionario.fecha.isoformat(),
                 'hora': cuestionario.hora.isoformat(),
-                'ID_usuario': cuestionario.ID_usuario
+                'id_usuario': cuestionario.id_usuario
             },
             'respuestas': respuestas_detalle,
             'resultado': {
                 'prediccion': resultado.prediccion,
-                'ID_resultado': resultado.ID_resultado
+                'id_resultado': resultado.id_resultado
             } if resultado else None
         }), 200
         

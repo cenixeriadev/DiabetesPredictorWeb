@@ -131,7 +131,7 @@ def update_question(pregunta_id):
         # Verificar si el nuevo nombre ya existe (excluyendo la pregunta actual)
         existing_question = Pregunta.query.filter(
             Pregunta.nom_pregunta == data['nom_pregunta'],
-            Pregunta.ID_pregunta != pregunta_id
+            Pregunta.id_pregunta != pregunta_id
         ).first()
         
         if existing_question:

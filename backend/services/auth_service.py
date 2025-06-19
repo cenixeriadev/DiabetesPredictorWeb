@@ -34,7 +34,7 @@ class AuthService:
                 }
             
             # Crear sesión
-            session['user_id'] = usuario.ID_usuario
+            session['user_id'] = usuario.id_usuario
             session['username'] = usuario.username
             
             return {

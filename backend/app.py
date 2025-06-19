@@ -19,14 +19,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Configuración de sesiones
-app.config['SESSION_COOKIE_SECURE'] = False  # Cambiar a True en producción con HTTPS
+app.config['SESSION_COOKIE_SECURE'] = True 
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # Configurar CORS
-frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
 CORS(app, 
-        origins="*",#TODO: cambiar al verdadero frontend_url en producción
+        origins=[frontend_url],
         supports_credentials=True,
         allow_headers=['Content-Type', 'Authorization'],
         methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])

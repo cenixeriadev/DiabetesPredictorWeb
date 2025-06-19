@@ -31,7 +31,7 @@ const Login = () => {
                 withCredentials: true // Importante para que las cookies se manejen correctamente
             });
             
-            if (response.data.success) {
+            if (response.status === 200) {
                 localStorage.setItem("logueado", "true");
                 navigate('/Home');
             }

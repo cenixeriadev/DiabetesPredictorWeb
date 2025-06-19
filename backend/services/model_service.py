@@ -161,7 +161,7 @@ class ModelService:
             return {"error": "No hay modelo cargado"}
         
         info = {
-            "model_path": str(self.model_path),
+            "model_path": str(self.model_path),#FIXME: path wn :v no sale en una el path del modelo sino del escalador
             "model_type": type(self.model).__name__,
             "loaded": True
         }

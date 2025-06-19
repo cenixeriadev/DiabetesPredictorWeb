@@ -74,14 +74,14 @@ class Pregunta(db.Model):
 class Respuesta(db.Model):
     __tablename__ = 'respuesta'
     
-    ID_resultado = db.Column(db.Integer, primary_key=True)
+    ID_respuesta = db.Column(db.Integer, primary_key=True)
     respuesta_str = db.Column(db.String(255), nullable=False)
     ID_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.ID_cuestionario'), nullable=False)
     ID_pregunta = db.Column(db.Integer, db.ForeignKey('pregunta.ID_pregunta'), nullable=False)
     
     def to_dict(self):
         return {
-            'ID_resultado': self.ID_resultado,
+            'ID_respuesta': self.ID_respuesta,
             'respuesta_str': self.respuesta_str,
             'ID_cuestionario': self.ID_cuestionario,
             'ID_pregunta': self.ID_pregunta

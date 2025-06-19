@@ -1,38 +1,71 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import 'boxicons/css/boxicons.min.css';
 import '../styles/Login.css';
 
-
 const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isRegisterActive, setIsRegisterActive] = useState(false);
+    const url_base = "https://diabetespredictorweb.onrender.com";
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        contrasena: ''
+    });
+    const [isRegisterMode, setIsRegisterMode] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (username === "Me" && password === "xd") {
-            localStorage.setItem("logueado", "true");
-            navigate('/Home');
-        } else {
+        try {
+            const response = await axios.post(`${url_base}/api/v1/auth/login`, {
+                username: formData.username,
+                contrasena: formData.contrasena
+            }, {
+                withCredentials: true // Importante para que las cookies se manejen correctamente
+            });
+            
+            if (response.data.success) {
+                localStorage.setItem("logueado", "true");
+                navigate('/Home');
+            }
+        } catch (error) {
             alert("Credenciales incorrectas");
+            console.error(error);
         }
     };
 
-    const handleRegister = () => {
-        // Funcionalidad de registro (pendiente de implementación)
-        alert("Registro no implementado");
-        setIsRegisterActive(true);
+    const handleRegister = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${url_base}/api/v1/auth/register`, {
+                username: formData.username,
+                email: formData.email,
+                contrasena: formData.contrasena
+            }, {
+                withCredentials: true
+            });
+            
+            if (response.data.success) {
+                alert('Registro exitoso');
+                setIsRegisterMode(false);
+            }
+        } catch (error) {
+            alert("Error en el registro");
+            console.error(error);
+        }
     };
 
-    const handleBack = () => {
-        navigate('../Proyecto Pagina Web/Pagina Inicio.html');
-    };
 
     return (
         <div className="login_container_page">
-            <div className={`container_login ${isRegisterActive ? "activate" : ""}`}>
+            <div className={`container_login ${isRegisterMode ? 'activate' : ''}`}>
                 <div className="form-box">
                     <form onSubmit={handleLogin} className="login-form">
                         <h1>Login</h1>
@@ -45,12 +78,12 @@ const Login = () => {
                         <p>Or use your email and password</p>
                         <div className="input-box">
                             <input
-                                id="username"
+                                name="username"
                                 type="text"
                                 placeholder="Username"
                                 required
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
+                                value={formData.username}
+                                onChange={handleInputChange}
                             />
                             <i className="bx bxs-user"></i>
                         </div>
@@ -60,8 +93,8 @@ const Login = () => {
                                 type="password"
                                 placeholder="Password"
                                 required
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                value={formData.contrasena}
+                                onChange={handleInputChange}
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
@@ -83,15 +116,36 @@ const Login = () => {
                         </div>
                         <p>Or register with a social platform</p>
                         <div className="input-box">
-                            <input type="text" placeholder="Username" required />
+                            <input 
+                                name="username"
+                                type="text" 
+                                placeholder="Username" 
+                                value={formData.username}
+                                onChange={handleInputChange}
+                                required
+                            />
                             <i className="bx bxs-user"></i>
                         </div>
                         <div className="input-box">
-                            <input type="text" placeholder="Email" required />
+                            <input 
+                                name="email"
+                                type="email" 
+                                placeholder="Email" 
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                            />
                             <i className="bx bxs-envelope"></i>
                         </div>
                         <div className="input-box">
-                            <input type="password" placeholder="Password" required />
+                            <input 
+                                name="password"
+                                type="password" 
+                                placeholder="Password" 
+                                value={formData.contrasena}
+                                onChange={handleInputChange}
+                                required
+                            />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
                         <button type="button" className="btn" onClick={handleRegister}>Register</button>
@@ -102,12 +156,12 @@ const Login = () => {
                     <div className="toggle-panel toggle-left">
                         <h1>Hello, Welcome!!</h1>
                         <p>Don't have an account?</p>
-                        <button className="btn register-btn" onClick={() => setIsRegisterActive(true)}>Register</button>
+                        <button className="btn register-btn" onClick={() => setIsRegisterMode(true)}>Register</button>
                     </div>
                     <div className="toggle-panel toggle-right">
                         <h1>Welcome Back!</h1>
                         <p>Already have an account?</p>
-                        <button className="btn login-btn" onClick={() => setIsRegisterActive(false)}>Log In</button>
+                        <button className="btn login-btn" onClick={() => setIsRegisterMode(false)}>Log In</button>
                     </div>
                 </div>
                 

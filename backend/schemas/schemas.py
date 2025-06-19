@@ -30,16 +30,16 @@ class UsuarioRegistro(BaseModel):
         return v
 
 class UsuarioResponse(BaseModel):
-    ID_usuario: int
+    id_usuario: int
     username: str
     correo: str
 
 class PreguntaResponse(BaseModel):
-    ID_pregunta: int
+    id_pregunta: int
     nom_pregunta: str
 
 class RespuestaInput(BaseModel):
-    ID_pregunta: int
+    id_pregunta: int
     respuesta_str: str
 
 class CuestionarioInput(BaseModel):
@@ -93,18 +93,18 @@ class PrediccionInput(BaseModel):
 class PrediccionResponse(BaseModel):
     prediccion: str
     probabilidad: Optional[float] = None
-    ID_cuestionario: Optional[int] = None
+    id_cuestionario: Optional[int] = None
 
 class CuestionarioResponse(BaseModel):
-    ID_cuestionario: int
+    id_cuestionario: int
     fecha: str
     hora: str
-    ID_usuario: int
+    id_usuario: int
 
 class ResultadoResponse(BaseModel):
-    ID_resultado: int
+    id_resultado: int
     prediccion: str
-    ID_cuestionario: int
+    id_cuestionario: int
 
 class LoginResponse(BaseModel):
     mensaje: str

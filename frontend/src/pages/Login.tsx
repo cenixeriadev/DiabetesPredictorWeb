@@ -89,7 +89,7 @@ const Login = () => {
                         </div>
                         <div className="input-box">
                             <input
-                                id="password"
+                                name="password"
                                 type="password"
                                 placeholder="Password"
                                 required

@@ -57,7 +57,9 @@ export default function Home(){
             <div id="resultado" ></div>
 
             </form>
-        
+            <div className="btn_cuestionario">
+                <Link to="/Pag_Cuestionario" className="btn_cuestionario_link">Cuestionario</Link>
+            </div>
     </>   
     );
 };

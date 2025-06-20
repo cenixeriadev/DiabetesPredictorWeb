@@ -4,7 +4,14 @@ import Home from './pages/Home';
 import Pag_Informacion from './pages/Pag_Informacion';
 import Footerprincipal from './components/footer';
 import Pag_Evaluacion from './pages/Pag_Evaluacion';
+import Pag_Cuestionario from './pages/Pag_Cuestionario';
 import Login from './pages/Login';
+import ResultadoBajo from './components/resultados_cuestionario/resultado_bajo';
+import ResultadoAlto from './components/resultados_cuestionario/resultado_alto';
+import ResultadoLigero from './components/resultados_cuestionario/resultado_ligero';
+import ResultadoModerado from './components/resultados_cuestionario/resultado_moderado';
+import ResultadoMuyAlto from './components/resultados_cuestionario/resultado_muy_alto';
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -12,11 +19,17 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/Home" replace />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/Pag_Informacion" element={<Pag_Informacion/>} />
-        <Route path="/Pag_Evaluacion" element={<Pag_Evaluacion/>} />
-        <Route path="/Login" element={<Login/>} />
+        <Route path="/Pag_Informacion" element={<Pag_Informacion />} />
+        <Route path="/Pag_Evaluacion" element={<Pag_Evaluacion />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Pag_Cuestionario" element={<Pag_Cuestionario />} />
+        <Route path="/resultado/bajo" element={<ResultadoBajo />} />
+        <Route path="/resultado/ligero" element={<ResultadoLigero />} />
+        <Route path="/resultado/moderado" element={<ResultadoModerado />} />
+        <Route path="/resultado/alto" element={<ResultadoAlto />} />
+        <Route path="/resultado/muy-alto" element={<ResultadoMuyAlto />} />
       </Routes>
       <Footerprincipal />
-    </BrowserRouter>  
+    </BrowserRouter>
   );
 }

@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 # Configuración de la aplicación
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'clave-secreta-por-defecto-cambiar-en-produccion')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://usuario:password@localhost:5432/diabetes_db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Configuración de sesiones
@@ -24,7 +24,7 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # Configurar CORS
-frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+frontend_url = os.getenv('FRONTEND_URL')
 CORS(app, 
         origins=[frontend_url],
         supports_credentials=True,
@@ -61,7 +61,8 @@ def root():
                 'register': '/api/v1/auth/register',
                 'logout': '/api/v1/auth/logout',
                 'me': '/api/v1/auth/me',
-                'check': '/api/v1/auth/check'
+                'check': '/api/v1/auth/check',
+                'delete_user': '/api/v1/auth/'
             },
             'prediction': {
                 'predict': '/api/v1/prediccion',

@@ -66,6 +66,36 @@ def register():
             'error': 'Error interno del servidor',
             'detalle': str(e)
         }), 500
+@auth_bp.route('/', methods=['DELETE'])
+def delete_user():
+    """Endpoint para eliminar un usuario"""
+    try:
+        # Verificar autenticación
+        auth_error = AuthService.require_auth()
+        if auth_error:
+            return jsonify({
+                'error': auth_error['message']
+            }), 401
+        
+        # Obtener usuario actual
+        usuario = AuthService.get_current_user()
+        # Eliminar usuario
+        result = AuthService.delete_user(usuario.id_usuario)
+
+        if result['success']:
+            return jsonify({
+                'mensaje': result['message']
+            }), 200
+        else:
+            return jsonify({
+                'error': result['message']
+            }), 500
+            
+    except Exception as e:
+        return jsonify({
+            'error': 'Error interno del servidor',
+            'detalle': str(e)
+        }), 500
 
 @auth_bp.route('/logout', methods=['POST'])
 def logout():

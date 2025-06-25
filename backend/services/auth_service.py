@@ -160,3 +160,35 @@ class AuthService:
                 'message': 'Acceso no autorizado. Inicie sesión primero.'
             }
         return None
+    @staticmethod
+    def delete_user(user_id: int) -> Dict[str, Any]:
+        """
+        Elimina un usuario por su ID.
+
+        Args:
+            user_id: ID del usuario a eliminar
+
+        Returns:
+            Diccionario con el resultado de la eliminación
+        """
+        try:
+            usuario = Usuario.query.get(user_id)
+            if not usuario:
+                return {
+                    'success': False,
+                    'message': 'Usuario no encontrado'
+                }
+
+            db.session.delete(usuario)
+            db.session.commit()
+
+            return {
+                'success': True,
+                'message': 'Usuario eliminado exitosamente'
+            }
+        except Exception as e:
+            db.session.rollback()
+            return {
+                'success': False,
+                'message': f'Error al eliminar el usuario: {str(e)}'
+            }

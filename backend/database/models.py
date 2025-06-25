@@ -2,9 +2,10 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import bcrypt
 
-db = SQLAlchemy()
+db = SQLAlchemy()#Inicializa la instancia de SQLAlchemy
 
 class Usuario(db.Model):
+    """Modelo que representa un usuario del sistema"""
     __tablename__ = 'usuario'
     
     id_usuario = db.Column(db.Integer, primary_key=True)
@@ -16,6 +17,7 @@ class Usuario(db.Model):
     cuestionarios = db.relationship('Cuestionario', backref='usuario', lazy=True)
     
     def __init__(self, username, correo, contrasena):
+        """Inicializa un nuevo usuario con un nombre de usuario, correo y contraseña"""
         self.username = username
         self.correo = correo
         self.set_password(contrasena)
@@ -30,6 +32,7 @@ class Usuario(db.Model):
         return bcrypt.checkpw(password.encode('utf-8'), self.contrasena.encode('utf-8'))
     
     def to_dict(self):
+        """Convierte el objeto Usuario a un diccionario"""
         return {
             'id_usuario': self.id_usuario,
             'username': self.username,
@@ -37,6 +40,7 @@ class Usuario(db.Model):
         }
 
 class Cuestionario(db.Model):
+    """Modelo que representa un cuestionario"""
     __tablename__ = 'cuestionario'
     
     id_cuestionario = db.Column(db.Integer, primary_key=True)
@@ -49,6 +53,7 @@ class Cuestionario(db.Model):
     respuestas = db.relationship('Respuesta', backref='cuestionario', lazy=True)
     
     def to_dict(self):
+        """Convierte el objeto Cuestionario a un diccionario"""
         return {
             'id_cuestionario': self.id_cuestionario,
             'fecha': self.fecha.isoformat() if self.fecha else None,
@@ -57,6 +62,7 @@ class Cuestionario(db.Model):
         }
 
 class Pregunta(db.Model):
+    """Modelo que representa una pregunta dentro de un cuestionario"""
     __tablename__ = 'pregunta'
     
     id_pregunta = db.Column(db.Integer, primary_key=True)
@@ -66,12 +72,14 @@ class Pregunta(db.Model):
     respuestas = db.relationship('Respuesta', backref='pregunta', lazy=True)
     
     def to_dict(self):
+        """Convierte el objeto Pregunta a un diccionario"""
         return {
             'id_pregunta': self.id_pregunta,
             'nom_pregunta': self.nom_pregunta
         }
 
 class Respuesta(db.Model):
+    """Modelo que representa una respuesta a una pregunta en un cuestionario"""
     __tablename__ = 'respuesta'
     
     id_respuesta = db.Column(db.Integer, primary_key=True)
@@ -80,6 +88,7 @@ class Respuesta(db.Model):
     id_pregunta = db.Column(db.Integer, db.ForeignKey('pregunta.id_pregunta'), nullable=False)
     
     def to_dict(self):
+        """Convierte el objeto Respuesta a un diccionario"""
         return {
             'id_respuesta': self.id_respuesta,
             'respuesta_str': self.respuesta_str,
@@ -88,6 +97,7 @@ class Respuesta(db.Model):
         }
 
 class Resultado(db.Model):
+    """Modelo que representa el resultado de un cuestionario"""
     __tablename__ = 'resultado'
     
     id_resultado = db.Column(db.Integer, primary_key=True)
@@ -95,6 +105,7 @@ class Resultado(db.Model):
     id_cuestionario = db.Column(db.Integer, db.ForeignKey('cuestionario.id_cuestionario'), nullable=False)
     
     def to_dict(self):
+        """Convierte el objeto Resultado a un diccionario"""
         return {
             'id_resultado': self.id_resultado,
             'prediccion': self.prediccion,

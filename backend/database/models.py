@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+import datetime
 import bcrypt
 
 db = SQLAlchemy()#Inicializa la instancia de SQLAlchemy
@@ -14,7 +14,7 @@ class Usuario(db.Model):
     contrasena = db.Column(db.String(255), nullable=False)
     
     # Relaciones
-    cuestionarios = db.relationship('Cuestionario', backref='usuario', lazy=True)
+    cuestionarios = db.relationship('Cuestionario', backref='usuario', lazy=True,cascade="all, delete")
     
     def __init__(self, username, correo, contrasena):
         """Inicializa un nuevo usuario con un nombre de usuario, correo y contraseña"""
@@ -44,13 +44,13 @@ class Cuestionario(db.Model):
     __tablename__ = 'cuestionario'
     
     id_cuestionario = db.Column(db.Integer, primary_key=True)
-    fecha = db.Column(db.Date, nullable=False, default=datetime.utcnow)
-    hora = db.Column(db.Time, nullable=False, default=datetime.utcnow().time)
+    fecha = db.Column(db.Date, nullable=False, default=datetime.date.today())
+    hora = db.Column(db.Time, nullable=False, default=datetime.datetime.now().time())
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=False)
     
     # Relaciones
-    resultados = db.relationship('Resultado', backref='cuestionario', lazy=True)
-    respuestas = db.relationship('Respuesta', backref='cuestionario', lazy=True)
+    resultados = db.relationship('Resultado', backref='cuestionario', lazy=True , cascade="all, delete")
+    respuestas = db.relationship('Respuesta', backref='cuestionario', lazy=True , cascade="all, delete")
     
     def to_dict(self):
         """Convierte el objeto Cuestionario a un diccionario"""

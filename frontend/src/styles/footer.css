@@ -55,3 +55,13 @@ footer{
 .footer-logo{
     font-size: 42px;
 }
+.footer-icons .footer-social-icon {
+    color: #fff;
+    font-size: 2rem;
+    margin: 0 8px;
+    vertical-align: middle;
+    transition: color 0.2s;
+}
+.footer-icons .footer-social-icon:hover {
+    color: #4cc2fa;
+}

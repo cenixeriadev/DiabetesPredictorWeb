@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import 'boxicons/css/boxicons.min.css';
+import ResetPassword from './Reset_Password';
 import '../styles/Login.css';
 
 const Login = () => {
@@ -99,7 +100,7 @@ const Login = () => {
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
                         <div className="forgot-link">
-                            <a href="../New_password/index 3.html">Forgot your password?</a>
+                            <Link to="/ResetPassword">Forgot your password?</Link>
                         </div>
                         <button type="submit" className="btn">Sign in</button>
                     </form>
@@ -139,7 +140,7 @@ const Login = () => {
                         </div>
                         <div className="input-box">
                             <input 
-                                name="password"
+                                name="contrasena"
                                 type="password" 
                                 placeholder="Password" 
                                 value={formData.contrasena}

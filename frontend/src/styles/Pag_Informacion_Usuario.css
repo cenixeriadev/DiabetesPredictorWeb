@@ -1,0 +1,181 @@
+:root {
+    --primary-color: #4a6cfa;
+    --primary-hover: #3654d1;
+    --light-bg: #f7f9fc;
+    --border-color: #e1e5ee;
+    --sidebar-bg: #ffffff;
+    --text-dark: #2d3748;
+    --text-light: #606f7b;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+}
+
+.profileinfo-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--light-bg);
+}
+
+.profileinfo-sidebar {
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    padding: 30px 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 10;
+}
+
+.profileinfo-main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: var(--light-bg);
+}
+
+.profileinfo-menu-item {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.profileinfo-menu-item:hover {
+    background-color: rgba(74, 108, 250, 0.1);
+    color: var(--primary-color);
+}
+
+.profileinfo-menu-item.active {
+    background-color: rgba(74, 108, 250, 0.15);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.profileinfo-separator {
+    border-top: 1px solid var(--border-color);
+    margin: 25px 0;
+}
+
+.profileinfo-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.profileinfo-profile-picture {
+    width: 120px;
+    height: 120px;
+    background-color: rgba(74, 108, 250, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 0 4px white, 0 0 0 5px var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profileinfo-profile-picture:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px white, 0 0 0 5px var(--primary-color);
+}
+
+.profileinfo-avatar-icon {
+    font-size: 60px;
+    color: var(--primary-color);
+}
+
+.profileinfo-update-button {
+    color: var(--primary-color);
+    font-size: 14px;
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.profileinfo-update-button:hover {
+    background-color: rgba(74, 108, 250, 0.1);
+}
+
+.profileinfo-form {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.profileinfo-form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.profileinfo-input-container {
+    position: relative;
+}
+
+.profileinfo-form-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.profileinfo-form input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: white;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    font-size: 14px;
+}
+
+.profileinfo-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 108, 250, 0.2);
+}
+
+.profileinfo-submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.profileinfo-submit-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profileinfo-main-content h1 {
+    font-size: 32px;
+    margin: 0 0 15px 0;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.profileinfo-main-content p {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: var(--text-light);
+    font-size: 16px;
+}

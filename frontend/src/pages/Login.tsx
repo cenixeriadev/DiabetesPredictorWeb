@@ -7,7 +7,7 @@ import '../styles/Login.css';
 
 const Login = () => {
     const url_base = "https://diabetespredictorweb.onrender.com";
-    
+
     const [formData, setFormData] = useState({
         username: '',
         correo: '',
@@ -34,14 +34,14 @@ const Login = () => {
                 withCredentials: true
             });
 
-            if (response.data.mensaje) {
+            if (response.data.success) {
                 localStorage.setItem("logueado", "true");
                 navigate('/Home');
             } else {
-                alert(response.data.error || "Credenciales incorrectas");
+                alert(response.data.message || "Credenciales incorrectas");
             }
         } catch (error: any) {
-            alert(error.response?.data?.error || "Credenciales incorrectas");
+            alert(error.response?.data?.message || "Error al iniciar sesión");
             console.error(error);
         }
     };
@@ -57,14 +57,14 @@ const Login = () => {
                 withCredentials: true
             });
 
-            if (response.data.mensaje) {
-                alert('Registro exitoso');
+            if (response.data.success) {
+                alert(response.data.message || 'Registro exitoso');
                 setIsRegisterMode(false);
             } else {
-                alert(response.data.error || "Error en el registro");
+                alert(response.data.message || "Error en el registro");
             }
         } catch (error: any) {
-            alert(error.response?.data?.error || "Error en el registro");
+            alert(error.response?.data?.message || "Error en el registro");
             console.error(error);
         }
     };

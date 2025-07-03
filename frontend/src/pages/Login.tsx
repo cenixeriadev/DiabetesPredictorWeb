@@ -111,7 +111,7 @@ const Login = () => {
                 </div>
 
                 <div className="form-box register">
-                    <form>
+                    <form onSubmit={handleRegister}>
                         <h1>Registration</h1>
                         <div className="social-icons">
                             <a href="#"><i className="bx bxl-google"></i></a>
@@ -153,7 +153,7 @@ const Login = () => {
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
-                        <button type="button" className="btn" onClick={handleRegister}>Register</button>
+                        <button type="submit" className="btn">Register</button>
                     </form>
                 </div>
 

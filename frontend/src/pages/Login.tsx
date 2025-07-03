@@ -34,14 +34,14 @@ const Login = () => {
                 withCredentials: true
             });
 
-            if (response.data.success) {
+            if (response.status === 200 && response.data.usuario) {
                 localStorage.setItem("logueado", "true");
                 navigate('/Home');
             } else {
-                alert(response.data.message || "Credenciales incorrectas");
+                alert(response.data.error || "Credenciales incorrectas");
             }
         } catch (error: any) {
-            alert(error.response?.data?.message || "Error al iniciar sesión");
+            alert(error.response?.data?.error || "Error al iniciar sesión");
             console.error(error);
         }
     };
@@ -57,14 +57,14 @@ const Login = () => {
                 withCredentials: true
             });
 
-            if (response.data.success) {
-                alert(response.data.message || 'Registro exitoso');
+            if (response.status === 201 && response.data.usuario) {
+                alert(response.data.mensaje || 'Registro exitoso');
                 setIsRegisterMode(false);
             } else {
-                alert(response.data.message || "Error en el registro");
+                alert(response.data.error || "Error en el registro");
             }
         } catch (error: any) {
-            alert(error.response?.data?.message || "Error en el registro");
+            alert(error.response?.data?.error || "Error en el registro");
             console.error(error);
         }
     };

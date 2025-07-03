@@ -46,13 +46,14 @@ def predict_diabetes():
         
         # Guardar respuestas individuales (opcional, basado en los campos de entrada)
         field_mapping = {
-            'pregnancies': 'Número de embarazos',
-            'glucose': 'Nivel de glucosa',
-            'blood_pressure': 'Presión arterial',
-            'insulin': 'Nivel de insulina',
-            'bmi': 'Índice de masa corporal',
-            'diabetes_pedigree_function': 'Función de pedigrí de diabetes',
-            'age': 'Edad'
+            'gender': 'Genero',
+            'age': 'Edad',
+            'hypertension': 'Tiene hypertension',
+            'heart_disease': 'Enfermedad del corazón',
+            'smoking_history': 'Historial de tabaquismo',
+            'bmi': 'Indice de Masa corporal',
+            'HbA1c_level': 'Promedio de azúcar en sangre',
+            'blood_glucose_level': 'Nivel de glucosa en sangre'
         }
         
         for field, question_text in field_mapping.items():

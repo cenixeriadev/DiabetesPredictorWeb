@@ -25,7 +25,7 @@ CREATE TABLE respuesta (
     id_respuesta SERIAL PRIMARY KEY,
     id_cuestionario INTEGER NOT NULL,
     id_pregunta INTEGER NOT NULL,
-    respuesta VARCHAR(255) NOT NULL,
+    respuesta_str VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_cuestionario) REFERENCES cuestionario(id_cuestionario) ON DELETE CASCADE,
     FOREIGN KEY (id_pregunta) REFERENCES pregunta(id_pregunta) ON DELETE CASCADE
 );

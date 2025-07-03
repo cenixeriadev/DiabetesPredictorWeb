@@ -29,15 +29,17 @@ const Login = () => {
                 username: formData.username,
                 contrasena: formData.contrasena
             }, {
-                withCredentials: true // Importante para que las cookies se manejen correctamente
+                withCredentials: true
             });
-            
-            if (response.status === 200) {
+
+            if (response.data.mensaje) {
                 localStorage.setItem("logueado", "true");
                 navigate('/Home');
+            } else {
+                alert(response.data.error || "Credenciales incorrectas");
             }
-        } catch (error) {
-            alert("Credenciales incorrectas");
+        } catch (error: any) {
+            alert(error.response?.data?.error || "Credenciales incorrectas");
             console.error(error);
         }
     };
@@ -52,13 +54,15 @@ const Login = () => {
             }, {
                 withCredentials: true
             });
-            
-            if (response.data.success) {
+
+            if (response.data.mensaje) {
                 alert('Registro exitoso');
                 setIsRegisterMode(false);
+            } else {
+                alert(response.data.error || "Error en el registro");
             }
-        } catch (error) {
-            alert("Error en el registro");
+        } catch (error: any) {
+            alert(error.response?.data?.error || "Error en el registro");
             console.error(error);
         }
     };

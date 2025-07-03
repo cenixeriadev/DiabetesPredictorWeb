@@ -7,11 +7,13 @@ import '../styles/Login.css';
 
 const Login = () => {
     const url_base = "https://diabetespredictorweb.onrender.com";
+    
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
+        correo: '',
         contrasena: ''
     });
+
     const [isRegisterMode, setIsRegisterMode] = useState(false);
     const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ const Login = () => {
         try {
             const response = await axios.post(`${url_base}/api/v1/auth/register`, {
                 username: formData.username,
-                correo: formData.email,
+                correo: formData.correo,
                 contrasena: formData.contrasena
             }, {
                 withCredentials: true
@@ -67,7 +69,6 @@ const Login = () => {
         }
     };
 
-
     return (
         <div className="login_container_page">
             <div className={`container_login ${isRegisterMode ? 'activate' : ''}`}>
@@ -80,7 +81,7 @@ const Login = () => {
                             <a href="#"><i className="bx bxl-github"></i></a>
                             <a href="#"><i className="bx bxl-instagram"></i></a>
                         </div>
-                        <p>Or use your email and password</p>
+                        <p>Or use your username and password</p>
                         <div className="input-box">
                             <input
                                 name="username"
@@ -119,7 +120,7 @@ const Login = () => {
                             <a href="#"><i className="bx bxl-github"></i></a>
                             <a href="#"><i className="bx bxl-instagram"></i></a>
                         </div>
-                        <p>Or register with a social platform</p>
+                        <p>Or register with your username and email</p>
                         <div className="input-box">
                             <input 
                                 name="username"
@@ -133,10 +134,10 @@ const Login = () => {
                         </div>
                         <div className="input-box">
                             <input 
-                                name="email"
+                                name="correo"
                                 type="email" 
-                                placeholder="Email" 
-                                value={formData.email}
+                                placeholder="Correo" 
+                                value={formData.correo}
                                 onChange={handleInputChange}
                                 required
                             />
@@ -169,7 +170,6 @@ const Login = () => {
                         <button className="btn login-btn" onClick={() => setIsRegisterMode(false)}>Log In</button>
                     </div>
                 </div>
-                
             </div>
         </div>    
     );

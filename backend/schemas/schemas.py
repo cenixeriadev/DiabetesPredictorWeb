@@ -57,36 +57,36 @@ class PrediccionInput(BaseModel):
     Ajusta estos campos según las características que use tu modelo.
     """
     # Ejemplo de campos comunes para predicción de diabetes
-    pregnancies: Optional[int] = 0
-    glucose: float
-    blood_pressure: float
-    skin_thickness: Optional[float] = 0
-    insulin: Optional[float] = 0
+    gender: str
+    age: float
+    hypertension: str
+    heart_disease: str
+    smoking_history: Optional[str] = 'No Info'
     bmi: float
-    diabetes_pedigree_function: Optional[float] = 0
-    age: int
+    HbA1c_level: float
+    blood_glucose_level: int
     
-    @field_validator('glucose')
+    @field_validator('blood_glucose_level')
     def glucose_must_be_positive(cls, v):
         if v <= 0:
-            raise ValueError('El nivel de glucosa debe ser positivo')
+            raise ValueError('El nivel de glucosa en sangre debe ser positivo')
         return v
     
-    @field_validator('blood_pressure')
-    def blood_pressure_must_be_positive(cls, v):
-        if v <= 0:
-            raise ValueError('La presión arterial debe ser positiva')
+    @field_validator('HbA1c_level')
+    def HbA1c_level_must_be_positive(cls, v):
+        if v <= 0.0:
+            raise ValueError('El nivel de HbA1c debe ser positivo')
         return v
     
     @field_validator('bmi')
     def bmi_must_be_positive(cls, v):
-        if v <= 0:
+        if v <= 0.0:
             raise ValueError('El BMI debe ser positivo')
         return v
     
     @field_validator('age')
     def age_must_be_positive(cls, v):
-        if v <= 0:
+        if v <= 0.0:
             raise ValueError('La edad debe ser positiva')
         return v
 

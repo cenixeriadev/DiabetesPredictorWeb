@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import 'boxicons/css/boxicons.min.css';
+import ResetPassword from './Reset_Password';
 import '../styles/Login.css';
 
 const Login = () => {
     const url_base = "https://diabetespredictorweb.onrender.com";
+
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
+        correo: '',
         contrasena: ''
     });
+
     const [isRegisterMode, setIsRegisterMode] = useState(false);
     const navigate = useNavigate();
 
@@ -28,15 +31,17 @@ const Login = () => {
                 username: formData.username,
                 contrasena: formData.contrasena
             }, {
-                withCredentials: true // Importante para que las cookies se manejen correctamente
+                withCredentials: true
             });
-            
-            if (response.status === 200) {
+
+            if (response.status === 200 && response.data.usuario) {
                 localStorage.setItem("logueado", "true");
                 navigate('/Home');
+            } else {
+                alert(response.data.error || "Credenciales incorrectas");
             }
-        } catch (error) {
-            alert("Credenciales incorrectas");
+        } catch (error: any) {
+            alert(error.response?.data?.error || "Error al iniciar sesión");
             console.error(error);
         }
     };
@@ -46,22 +51,23 @@ const Login = () => {
         try {
             const response = await axios.post(`${url_base}/api/v1/auth/register`, {
                 username: formData.username,
-                email: formData.email,
+                correo: formData.correo,
                 contrasena: formData.contrasena
             }, {
                 withCredentials: true
             });
-            
-            if (response.data.success) {
-                alert('Registro exitoso');
+
+            if (response.status === 201 && response.data.usuario) {
+                alert(response.data.mensaje || 'Registro exitoso');
                 setIsRegisterMode(false);
+            } else {
+                alert(response.data.error || "Error en el registro");
             }
-        } catch (error) {
-            alert("Error en el registro");
+        } catch (error: any) {
+            alert(error.response?.data?.error || "Error en el registro");
             console.error(error);
         }
     };
-
 
     return (
         <div className="login_container_page">
@@ -75,7 +81,7 @@ const Login = () => {
                             <a href="#"><i className="bx bxl-github"></i></a>
                             <a href="#"><i className="bx bxl-instagram"></i></a>
                         </div>
-                        <p>Or use your email and password</p>
+                        <p>Or use your username and password</p>
                         <div className="input-box">
                             <input
                                 name="username"
@@ -99,14 +105,14 @@ const Login = () => {
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
                         <div className="forgot-link">
-                            <a href="../New_password/index 3.html">Forgot your password?</a>
+                            <Link to="/ResetPassword">Forgot your password?</Link>
                         </div>
                         <button type="submit" className="btn">Sign in</button>
                     </form>
                 </div>
 
                 <div className="form-box register">
-                    <form>
+                    <form onSubmit={handleRegister}>
                         <h1>Registration</h1>
                         <div className="social-icons">
                             <a href="#"><i className="bx bxl-google"></i></a>
@@ -114,7 +120,7 @@ const Login = () => {
                             <a href="#"><i className="bx bxl-github"></i></a>
                             <a href="#"><i className="bx bxl-instagram"></i></a>
                         </div>
-                        <p>Or register with a social platform</p>
+                        <p>Or register with your username and email</p>
                         <div className="input-box">
                             <input 
                                 name="username"
@@ -128,10 +134,10 @@ const Login = () => {
                         </div>
                         <div className="input-box">
                             <input 
-                                name="email"
+                                name="correo"
                                 type="email" 
-                                placeholder="Email" 
-                                value={formData.email}
+                                placeholder="Correo" 
+                                value={formData.correo}
                                 onChange={handleInputChange}
                                 required
                             />
@@ -139,7 +145,7 @@ const Login = () => {
                         </div>
                         <div className="input-box">
                             <input 
-                                name="password"
+                                name="contrasena"
                                 type="password" 
                                 placeholder="Password" 
                                 value={formData.contrasena}
@@ -148,7 +154,7 @@ const Login = () => {
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
-                        <button type="button" className="btn" onClick={handleRegister}>Register</button>
+                        <button type="submit" className="btn">Register</button>
                     </form>
                 </div>
 
@@ -164,7 +170,6 @@ const Login = () => {
                         <button className="btn login-btn" onClick={() => setIsRegisterMode(false)}>Log In</button>
                     </div>
                 </div>
-                
             </div>
         </div>    
     );

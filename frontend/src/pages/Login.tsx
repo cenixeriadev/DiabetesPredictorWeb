@@ -49,7 +49,7 @@ const Login = () => {
         try {
             const response = await axios.post(`${url_base}/api/v1/auth/register`, {
                 username: formData.username,
-                email: formData.email,
+                correo: formData.email,
                 contrasena: formData.contrasena
             }, {
                 withCredentials: true

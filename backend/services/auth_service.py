@@ -1,6 +1,6 @@
 from flask import session
 from database.models import db, Usuario
-from schemas.schemas import UsuarioLogin, UsuarioRegistro
+from schemas.schemas import UsuarioLogin, UsuarioRegistro , UsuarioActualizar
 from typing import Optional, Dict, Any
 
 class AuthService:
@@ -191,4 +191,43 @@ class AuthService:
             return {
                 'success': False,
                 'message': f'Error al eliminar el usuario: {str(e)}'
+            }
+
+    @staticmethod
+    def update_user(user_id: int, data: UsuarioActualizar) -> Dict[str, Any]:
+        """
+        Actualiza la información de un usuario.
+
+        Args:
+            user_id: ID del usuario a actualizar
+            data: Diccionario con los campos a actualizar
+
+        Returns:
+            Diccionario con el resultado de la actualización
+        """
+        try:
+            usuario = Usuario.query.get(user_id)
+            if not usuario:
+                return {
+                    'success': False,
+                    'message': 'Usuario no encontrado'
+                }
+            if data.correo:
+                usuario.correo = data.correo
+            if data.username:
+                usuario.username = data.username
+            if data.contrasena:
+                usuario.set_password(data.contrasena)
+            db.session.commit()
+
+            return {
+                'success': True,
+                'message': 'Usuario actualizado exitosamente',
+                'usuario': usuario.to_dict()
+            }
+        except Exception as e:
+            db.session.rollback()
+            return {
+                'success': False,
+                'message': f'Error al actualizar el usuario: {str(e)}'
             }

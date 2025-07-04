@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from pydantic import ValidationError
-from schemas.schemas import UsuarioLogin, UsuarioRegistro, LoginResponse, ErrorResponse
+from schemas.schemas import UsuarioLogin, UsuarioRegistro, LoginResponse, ErrorResponse , UsuarioActualizar
 from services.auth_service import AuthService
 
 auth_bp = Blueprint('auth', __name__)
@@ -158,6 +158,47 @@ def check_auth():
             'usuario': AuthService.get_current_user().to_dict() if is_authenticated else None
         }), 200
         
+    except Exception as e:
+        return jsonify({
+            'error': 'Error interno del servidor',
+            'detalle': str(e)
+        }), 500
+
+@auth_bp.route('/', methods=['PATCH']) 
+def update_user():
+    """Endpoint para actualizar información del usuario"""
+    try:
+        # Verificar autenticación
+        auth_error = AuthService.require_auth()
+        if auth_error:
+            return jsonify({
+                'error': auth_error['message']
+            }), 401
+        
+        # Obtener usuario actual
+        usuario = AuthService.get_current_user()
+        
+        # Validar datos de entrada con Pydantic
+        update_data = UsuarioActualizar(**request.get_json())
+        
+        # Actualizar usuario
+        result = AuthService.update_user(usuario.id_usuario, update_data)
+        
+        if result['success']:
+            return jsonify({
+                'mensaje': result['message'],
+                'usuario': result['usuario']
+            }), 200
+        else:
+            return jsonify({
+                'error': result['message']
+            }), 400
+            
+    except ValidationError as e:
+        return jsonify({
+            'error': 'Datos de entrada inválidos',
+            'detalle': e.errors()
+        }), 400
     except Exception as e:
         return jsonify({
             'error': 'Error interno del servidor',

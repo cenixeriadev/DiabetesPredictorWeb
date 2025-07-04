@@ -28,6 +28,22 @@ class UsuarioRegistro(BaseModel):
         if len(v) < 6:
             raise ValueError('La contraseña debe tener al menos 6 caracteres')
         return v
+class UsuarioActualizar(BaseModel):
+    username: Optional[str] = None
+    correo: Optional[EmailStr] = None
+    contrasena: Optional[str] = None
+
+    @field_validator('username')
+    def username_must_not_be_empty(cls, v):
+        if v is not None and not v.strip():
+            raise ValueError('El username no puede estar vacío')
+        return v.strip() if v else v
+
+    @field_validator('contrasena')
+    def password_must_be_strong(cls, v):
+        if v is not None and len(v) < 6:
+            raise ValueError('La contraseña debe tener al menos 6 caracteres')
+        return v
 
 class UsuarioResponse(BaseModel):
     id_usuario: int

@@ -10,7 +10,7 @@ interface EvaluacionItem {
   id_cuestionario: number;
   fecha: string;
   hora: string;
-  prediccion: number;
+  prediccion: string;
   id_resultado: number;
 }
 

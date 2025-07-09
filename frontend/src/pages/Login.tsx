@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import 'boxicons/css/boxicons.min.css';
-import ResetPassword from './Reset_Password';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Login.css';
 
@@ -36,9 +35,14 @@ const Login = () => {
             } else {
                 setError("Credenciales incorrectas. Por favor, inténtalo de nuevo.");
             }
-        } catch (error: any) {
-            setError(error.message || "Error al iniciar sesión");
-            console.error(error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message || "Error al iniciar sesión");
+                console.error(error);
+            } else {
+                setError("Error al iniciar sesión");
+                console.error(error);
+            }
         }
     };
 
@@ -60,9 +64,14 @@ const Login = () => {
             } else {
                 setError("Error en el registro. El nombre de usuario o correo ya existe.");
             }
-        } catch (error: any) {
-            setError(error.message || "Error en el registro");
-            console.error(error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message || "Error en el registro");
+                console.error(error);
+            } else {
+                setError("Error en el registro");
+                console.error(error);
+            }
         }
     };
 

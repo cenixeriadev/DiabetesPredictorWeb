@@ -6,6 +6,12 @@ import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
+type PredictionResult = {
+    prediccion: string;
+    probabilidad_clase_0: number;
+    probabilidad_clase_1: number;
+};
+
 export default function EvaluationPage() {
     const [formData, setFormData] = useState({
         gender: '',
@@ -18,13 +24,15 @@ export default function EvaluationPage() {
         blood_glucose_level: ''
     });
 
-    const [predictionResult, setPredictionResult] = useState(null);
+    const [predictionResult, setPredictionResult] = useState<PredictionResult | null>(null);
 
-    const handleChange = (e) => {
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             // Convertir los valores numéricos de string a número
@@ -35,8 +43,8 @@ export default function EvaluationPage() {
                 HbA1c_level: parseFloat(formData.HbA1c_level),
                 blood_glucose_level: parseInt(formData.blood_glucose_level, 10)
             };
-
-            const apiUrl = "http://localhost:5000/api/v1/prediccion";
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = `${API_URL}/api/v1/prediccion`;
             const response = await axios.post(apiUrl, numericFormData, {
                 withCredentials: true, // Importante para enviar cookies
                 headers: {
@@ -46,7 +54,13 @@ export default function EvaluationPage() {
             setPredictionResult(response.data);
         } catch (error) {
             console.error('Error en la predicción:', error);
-            alert(`Error al realizar la predicción: ${error.response?.data?.error || error.message}`);
+            if (axios.isAxiosError(error)) {
+                alert(`Error al realizar la predicción: ${error.response?.data?.error || error.message}`);
+            } else if (error instanceof Error) {
+                alert(`Error al realizar la predicción: ${error.message}`);
+            } else {
+                alert('Error al realizar la predicción: Error desconocido');
+            }
         }
     };
 
@@ -76,8 +90,8 @@ export default function EvaluationPage() {
             },
             tooltip: {
                 callbacks: {
-                    label: function(context: any) {
-                        return `${context.dataset.label}: ${context.raw.toFixed(2)}%`;
+                    label: function(context: import('chart.js').TooltipItem<'bar'>) {
+                        return `${context.dataset.label}: ${(context.raw as number).toFixed(2)}%`;
                     }
                 }
             }

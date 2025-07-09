@@ -71,7 +71,7 @@ export default function Home(){
 
         <section className="contenedor_septimo_home">
             <nav className="evaluacion_home">   
-                <Link to="/Evaluation">Inicia tu evaluación</Link>
+                <Link to="/Pag_Evaluacion">Inicia tu evaluación</Link>
             </nav>
         </section>
 

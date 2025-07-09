@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import 'boxicons/css/boxicons.min.css';
 import ResetPassword from './Reset_Password';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Login.css';
 
 const Login = () => {
-    const url_base = "https://diabetespredictorweb.onrender.com";
+    const { login, register } = useAuth();
 
     const [formData, setFormData] = useState({
         username: '',
@@ -15,6 +15,7 @@ const Login = () => {
     });
 
     const [isRegisterMode, setIsRegisterMode] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,45 +27,41 @@ const Login = () => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
         try {
-            const response = await axios.post(`${url_base}/api/v1/auth/login`, {
-                username: formData.username,
-                contrasena: formData.contrasena
-            }, {
-                withCredentials: true
-            });
-
-            if (response.status === 200 && response.data.usuario) {
-                localStorage.setItem("logueado", "true");
+            const success = await login(formData.username, formData.contrasena);
+            
+            if (success) {
                 navigate('/Home');
             } else {
-                alert(response.data.error || "Credenciales incorrectas");
+                setError("Credenciales incorrectas. Por favor, inténtalo de nuevo.");
             }
         } catch (error: any) {
-            alert(error.response?.data?.error || "Error al iniciar sesión");
+            setError(error.message || "Error al iniciar sesión");
             console.error(error);
         }
     };
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
         try {
-            const response = await axios.post(`${url_base}/api/v1/auth/register`, {
-                username: formData.username,
-                correo: formData.correo,
-                contrasena: formData.contrasena
-            }, {
-                withCredentials: true
-            });
-
-            if (response.status === 201 && response.data.usuario) {
-                alert(response.data.mensaje || 'Registro exitoso');
+            const success = await register(formData.username, formData.correo, formData.contrasena);
+            
+            if (success) {
+                alert('Registro exitoso. Ahora puedes iniciar sesión.');
                 setIsRegisterMode(false);
+                // Limpiar los campos después del registro exitoso
+                setFormData({
+                    username: '',
+                    correo: '',
+                    contrasena: ''
+                });
             } else {
-                alert(response.data.error || "Error en el registro");
+                setError("Error en el registro. El nombre de usuario o correo ya existe.");
             }
         } catch (error: any) {
-            alert(error.response?.data?.error || "Error en el registro");
+            setError(error.message || "Error en el registro");
             console.error(error);
         }
     };
@@ -107,6 +104,7 @@ const Login = () => {
                         <div className="forgot-link">
                             <Link to="/ResetPassword">Forgot your password?</Link>
                         </div>
+                        {error && <div className="error-message">{error}</div>}
                         <button type="submit" className="btn">Sign in</button>
                     </form>
                 </div>

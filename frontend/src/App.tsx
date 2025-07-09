@@ -15,29 +15,34 @@ import ResultadoMuyAlto from './components/resultados_cuestionario/resultado_muy
 import Pag_Informacion_Usuario from './pages/Pag_Informacion_Usuario';
 import DeleteUsuario from './pages/Delete_Usuario';
 import ListaEvaluaciones from './pages/ListaEvaluaciones';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import './styles/loading.css';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Headerprincipal />
-      <Routes>
-        <Route path="/" element={<Navigate to="/Home" replace />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Pag_Informacion" element={<Pag_Informacion />} />
-        <Route path="/Pag_Informacion_Usuario" element={<Pag_Informacion_Usuario />} />
-        <Route path="/ListaEvaluaciones" element={<ListaEvaluaciones />} />
-        <Route path="/Pag_Evaluacion" element={<Pag_Evaluacion />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/ResetPassword" element={<ResetPassword />} />
-        <Route path="/DeleteAccount" element={<DeleteUsuario />} />
-        <Route path="/Pag_Cuestionario" element={<Pag_Cuestionario />} />
-        <Route path="/resultado/bajo" element={<ResultadoBajo />} />
-        <Route path="/resultado/ligero" element={<ResultadoLigero />} />
-        <Route path="/resultado/moderado" element={<ResultadoModerado />} />
-        <Route path="/resultado/alto" element={<ResultadoAlto />} />
-        <Route path="/resultado/muy-alto" element={<ResultadoMuyAlto />} />
-      </Routes>
-      <Footerprincipal />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Headerprincipal />
+        <Routes>
+          <Route path="/" element={<Navigate to="/Home" replace />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/Pag_Informacion" element={<Pag_Informacion />} />
+          <Route path="/ProfileInformation" element={<ProtectedRoute><Pag_Informacion_Usuario /></ProtectedRoute>} />
+          <Route path="/ListaEvaluaciones" element={<ProtectedRoute><ListaEvaluaciones /></ProtectedRoute>} />
+          <Route path="/Pag_Evaluacion" element={<ProtectedRoute><Pag_Evaluacion /></ProtectedRoute>} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/DeleteAccount" element={<ProtectedRoute><DeleteUsuario /></ProtectedRoute>} />
+          <Route path="/Pag_Cuestionario" element={<ProtectedRoute><Pag_Cuestionario /></ProtectedRoute>} />
+          <Route path="/resultado/bajo" element={<ProtectedRoute><ResultadoBajo /></ProtectedRoute>} />
+          <Route path="/resultado/ligero" element={<ProtectedRoute><ResultadoLigero /></ProtectedRoute>} />
+          <Route path="/resultado/moderado" element={<ProtectedRoute><ResultadoModerado /></ProtectedRoute>} />
+          <Route path="/resultado/alto" element={<ProtectedRoute><ResultadoAlto /></ProtectedRoute>} />
+          <Route path="/resultado/muy-alto" element={<ProtectedRoute><ResultadoMuyAlto /></ProtectedRoute>} />
+        </Routes>
+        <Footerprincipal />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

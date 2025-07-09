@@ -179,3 +179,190 @@
     color: var(--text-light);
     font-size: 16px;
 }
+
+/* Estilos para botones deshabilitados */
+.profileinfo-submit-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Estilos para estados de carga y mensajes */
+.profileinfo-loading,
+.profileinfo-error,
+.profileinfo-success,
+.profileinfo-no-evaluations {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+.profileinfo-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileinfo-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.profileinfo-error {
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    color: #b71c1c;
+}
+
+.profileinfo-success {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    color: #1b5e20;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+}
+
+.profileinfo-retry-button {
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.profileinfo-retry-button:hover {
+    background-color: #d32f2f;
+}
+
+.profileinfo-no-evaluations {
+    background-color: #e8eaf6;
+    border: 1px solid #c5cae9;
+    color: #283593;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para elementos de la lista de evaluaciones */
+.profileinfo-evaluation-block {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.profileinfo-evaluation-block h3 {
+    margin-top: 0;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.profileinfo-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.profileinfo-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.profileinfo-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.profileinfo-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.profileinfo-button svg {
+    margin-right: 8px;
+}
+
+.profileinfo-pagination {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+/* Estilos para los botones de navegación entre vistas de usuario */
+.profileinfo-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+.profileinfo-link:hover {
+    color: var(--primary-color);
+}
+
+.profileinfo-link.logout {
+    color: #e53e3e;
+}
+
+.profileinfo-link.logout:hover {
+    color: #c53030;
+}
+
+/* Estilos específicos para resultados */
+input.result-0 {
+    color: #2b6cb0 !important;
+    background-color: #ebf8ff !important;
+}
+
+input.result-1 {
+    color: #dd6b20 !important;
+    background-color: #fffaf0 !important;
+}
+
+input.result-2 {
+    color: #e53e3e !important;
+    background-color: #fff5f5 !important;
+}
+
+.profileinfo-view-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--radius);
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.profileinfo-view-button:hover {
+    background-color: var(--primary-hover);
+}

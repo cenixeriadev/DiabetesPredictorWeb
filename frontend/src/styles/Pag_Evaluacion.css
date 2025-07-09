@@ -63,7 +63,8 @@
     margin-bottom: 2px;
 }
 
-.campo input {
+.campo input,
+.campo select {
     width: 100%;
     padding: 8px;
     margin-top: 2px;
@@ -96,9 +97,68 @@ button:hover {
     background: #3c3568;
 }
 
-#resultado {
+#resultado, .resultado {
     margin-top: 20px;
     font-weight: bold;
     text-align: center;
     font-size: 1.1em;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #d1c4e9;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.resultado h2 {
+    color: #574b90;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+    height: 400px;
+}
+
+.prediccion-info {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.prediccion-info h3 {
+    color: #574b90;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.prediccion-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: normal;
+}
+
+.alerta {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.alerta p {
+    margin: 5px 0;
+}
+
+.alerta-positiva {
+    background-color: rgba(255, 99, 132, 0.2);
+    border: 1px solid rgba(255, 99, 132, 0.5);
+}
+
+.alerta-negativa {
+    background-color: rgba(75, 192, 192, 0.2);
+    border: 1px solid rgba(75, 192, 192, 0.5);
 }

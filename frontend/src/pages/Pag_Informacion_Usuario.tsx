@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "../styles/Pag_Informacion_Usuario.css";
 import UserProfileLayout from "../components/UserProfileLayout";
 import { useAuth } from '../context/AuthContext';

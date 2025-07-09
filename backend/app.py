@@ -29,7 +29,7 @@ CORS(app,
         origins=[frontend_url],
         supports_credentials=True,
         allow_headers=['Content-Type', 'Authorization'],
-        methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+        methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS' , 'PATCH'])
 
 # Inicializar base de datos
 db.init_app(app)
@@ -62,7 +62,8 @@ def root():
                 'logout': '/api/v1/auth/logout',
                 'me': '/api/v1/auth/me',
                 'check': '/api/v1/auth/check',
-                'delete_user': '/api/v1/auth/'
+                'delete_user': '/api/v1/auth/',
+                'update_user': '/api/v1/auth/'
             },
             'prediction': {
                 'predict': '/api/v1/prediccion',

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/header.css";
+import { useAuth } from '../context/AuthContext';
 
 export default function Headerprincipal() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const isLoggedIn = localStorage.getItem('logueado') === 'true';
+    const { isAuthenticated, user } = useAuth();
 
     return (
         
@@ -29,8 +30,10 @@ export default function Headerprincipal() {
                     <Link to="/Pag_Evaluacion" onClick={() => setMenuOpen(false)}>Evaluacion</Link>
                 </nav>
                 <nav className="Login">
-                    {isLoggedIn ? (
-                        <Link to="/ProfileInformation" onClick={() => setMenuOpen(false)}>Usuario X</Link>
+                    {isAuthenticated ? (
+                        <Link to="/ProfileInformation" onClick={() => setMenuOpen(false)}>
+                            {user?.username || 'Usuario'}
+                        </Link>
                     ) : (
                         <Link to="/login" onClick={() => setMenuOpen(false)}>Login/Registro</Link>
                     )}

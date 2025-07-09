@@ -50,8 +50,8 @@ class ModelService:
             raise FileNotFoundError(f"La carpeta models no existe: {models_dir}")
         
         # Buscar archivos de modelo
-        model_files = list(models_dir.glob("*.pkl")) + list(models_dir.glob("*.joblib"))
-        
+        model_files = list(models_dir.glob("diabetes_*.pkl")) + list(models_dir.glob("diabetes_*.joblib"))
+
         if not model_files:
             raise FileNotFoundError("No se encontraron archivos de modelo (.pkl o .joblib) en la carpeta models")
         

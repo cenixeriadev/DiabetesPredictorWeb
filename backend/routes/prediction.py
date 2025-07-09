@@ -80,7 +80,8 @@ def predict_diabetes():
         
         return jsonify({
             'prediccion': prediction_result['prediccion'],
-            'probabilidad': prediction_result.get('probabilidad'),
+            'probabilidad_clase_1': prediction_result.get('probabilidad_clase_1'),
+            'probabilidad_clase_0': prediction_result.get('probabilidad_clase_0'),
             'id_cuestionario': nuevo_cuestionario.id_cuestionario,
             'fecha': nuevo_cuestionario.fecha.isoformat(),
             'hora': nuevo_cuestionario.hora.isoformat()

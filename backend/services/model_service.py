@@ -86,17 +86,21 @@ class ModelService:
             
             # Obtener probabilidades si el modelo las soporta
             try:
-                probabilities = self.model.predict_proba(features)[:, 1]
-                probability = float(np.max(probabilities))
+                probability_clase_one = self.model.predict_proba(features)[:, 1]
+                probability_clase_zero = self.model.predict_proba(features)[:, 0]
+                probability_clase_one = float(np.max(probability_clase_one))
+                probability_clase_zero = float(np.max(probability_clase_zero))
             except AttributeError:
-                probability = None
-            
+                probability_clase_one = None
+                probability_clase_zero = None
+
             # Interpretar la predicción
             prediction_label = self._interpret_prediction(prediction[0])
             
             return {
                 'prediccion': prediction_label,
-                'probabilidad': probability,
+                'probabilidad_clase_1': probability_clase_one,
+                'probabilidad_clase_0': probability_clase_zero,
                 'raw_prediction': int(prediction[0]) if isinstance(prediction[0], (int, np.integer)) else float(prediction[0])
             }
             

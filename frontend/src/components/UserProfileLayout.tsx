@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
-import UserProfileSidebar from './UserProfileSidebar';
+import React, { ReactNode } from "react";
+import UserProfileSidebar from "./UserProfileSidebar";
 
 interface UserProfileLayoutProps {
   children: ReactNode;
-  activePage: 'personal' | 'evaluaciones' | 'password' | 'delete';
+  activePage: "personal" | "evaluaciones" | "password" | "delete";
   title: string;
   subtitle?: string;
 }
@@ -12,7 +12,7 @@ const UserProfileLayout: React.FC<UserProfileLayoutProps> = ({
   children,
   activePage,
   title,
-  subtitle
+  subtitle,
 }) => {
   return (
     <div className="profileinfo-container">

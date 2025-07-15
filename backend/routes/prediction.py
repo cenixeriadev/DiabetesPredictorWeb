@@ -126,7 +126,7 @@ def get_prediction_history():
             historial.append({
                 'id_cuestionario': cuestionario.id_cuestionario,
                 'fecha': cuestionario.fecha.isoformat(),
-                'hora': cuestionario.hora.isoformat(),
+                'hora':  cuestionario.hora.strftime('%H:%M:%S'),
                 'prediccion': resultado.prediccion,
                 'id_resultado': resultado.id_resultado
             })

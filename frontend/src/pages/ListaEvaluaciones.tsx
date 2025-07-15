@@ -14,20 +14,37 @@ interface EvaluacionItem {
   id_resultado: number;
 }
 
-// Función para formatear la fecha
+// Función para formatear la fecha (ahora maneja timezone)
 const formatearFecha = (fechaISO: string): string => {
   const fecha = new Date(fechaISO);
+  // Asegurar que use la localización del navegador
   return fecha.toLocaleDateString('es-ES', {
+    timeZone: 'UTC',  // Asume que el backend usa UTC
     day: '2-digit',
     month: '2-digit',
     year: 'numeric'
   });
 };
 
-// Función para formatear la hora
+// Función para formatear la hora (más robusta)
 const formatearHora = (horaISO: string): string => {
-  const [hora, minutos] = horaISO.split('T')[1]?.split(':') || horaISO.split(':');
-  return `${hora}:${minutos}`;
+  try {
+    // Opción 1: Si viene como "HH:MM:SS"
+    if (/^\d{2}:\d{2}:\d{2}$/.test(horaISO)) {
+      return horaISO.substring(0, 5);  // Devuelve "HH:MM"
+    }
+    
+    // Opción 2: Si viene como ISO string (con 'T')
+    const date = new Date(`1970-01-01T${horaISO.split('T')[1]}`);
+    return date.toLocaleTimeString('es-ES', {
+      timeZone: 'UTC',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+  } catch {
+    return 'Hora inválida';
+  }
 };
 
 // Función para convertir la predicción numérica a texto descriptivo
@@ -45,7 +62,7 @@ export default function ListaEvaluaciones() {
     const [error, setError] = useState<string>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
-    
+    const [totalItems, setTotalItems] = useState<number>(0);
     useEffect(() => {
         const fetchEvaluaciones = async () => {
             setIsLoading(true);
@@ -58,6 +75,7 @@ export default function ListaEvaluaciones() {
                 
                 if (response.status === 200) {
                     setEvaluaciones(response.data.historial);
+                    setTotalItems(response.data.total);
                 }
             } catch (error) {
                 console.error('Error al obtener el historial de evaluaciones:', error);
@@ -71,7 +89,7 @@ export default function ListaEvaluaciones() {
     }, []);
     
     // Calculamos el número total de páginas
-    const totalPages = Math.ceil(evaluaciones.length / itemsPerPage);
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
     
     // Obtenemos los elementos para la página actual
     const currentItems = evaluaciones.slice(
@@ -123,9 +141,13 @@ export default function ListaEvaluaciones() {
             </div>
         ) : (
             <>
-                {currentItems.map((evaluacion) => (
+                {currentItems.map((evaluacion , index) => {
+
+                    const globalIndex = (currentPage - 1) * itemsPerPage + index + 1;
+                    return (
+                    
                     <div className="profileinfo-evaluation-block" key={evaluacion.id_cuestionario}>
-                        <h3>Evaluación #{evaluacion.id_cuestionario}</h3>
+                        <h3>Evaluación #{globalIndex}</h3>
                         <div className="profileinfo-form-group">
                             <label>Fecha:</label>
                             <input type="text" value={formatearFecha(evaluacion.fecha)} readOnly />
@@ -144,7 +166,8 @@ export default function ListaEvaluaciones() {
                             />
                         </div>
                     </div>
-                ))}
+                    );
+                })}
 
                 {totalPages > 1 && (
                     <div className="profileinfo-pagination">

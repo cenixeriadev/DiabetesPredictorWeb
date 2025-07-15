@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+from datetime import datetime , timezone
 import bcrypt
 
 db = SQLAlchemy()#Inicializa la instancia de SQLAlchemy
@@ -44,8 +44,8 @@ class Cuestionario(db.Model):
     __tablename__ = 'cuestionario'
     
     id_cuestionario = db.Column(db.Integer, primary_key=True)
-    fecha = db.Column(db.Date, nullable=False, default=datetime.date.today())
-    hora = db.Column(db.Time, nullable=False, default=datetime.datetime.now().time())
+    fecha = db.Column(db.Date, nullable=False,default=lambda: datetime.now(timezone.utc).date())
+    hora = db.Column(db.Time, nullable=False, default=lambda: datetime.now(timezone.utc).time())
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=False)
     
     # Relaciones

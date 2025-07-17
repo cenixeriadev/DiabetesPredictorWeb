@@ -37,7 +37,7 @@ export default function EvaluationPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Convertir los valores numéricos de string a número
+      
       const numericFormData = {
         ...formData,
         age: parseFloat(formData.age),
@@ -54,19 +54,36 @@ export default function EvaluationPage() {
         },
       });
       setPredictionResult(response.data);
+        
     } catch (error) {
-      console.error("Error en la predicción:", error);
-      if (axios.isAxiosError(error)) {
-        alert(
-          `Error al realizar la predicción: ${
-            error.response?.data?.error || error.message
-          }`
-        );
-      } else if (error instanceof Error) {
-        alert(`Error al realizar la predicción: ${error.message}`);
-      } else {
-        alert("Error al realizar la predicción: Error desconocido");
-      }
+        console.error("Error en la predicción:", error);
+        
+        if (axios.isAxiosError(error)) {
+            if (error.response) {
+                // Manejo de errores de validación (400)
+                if (error.response.status === 400 && error.response.data.detalle) {
+                    const errorDetails = error.response.data.detalle as Array<{
+                        loc: string[];
+                        msg: string;
+                    }>;
+                    
+                    const errorMessages = errorDetails.map(err => 
+                        `${err.loc.join('.')}: ${err.msg}`
+                    ).join('\n');
+                    
+                    alert(`Errores de validación:\n${errorMessages}`);
+                } else {
+                    // Otros errores
+                    alert(error.response.data.message || 
+                         error.response.data.error || 
+                         'Error desconocido');
+                }
+            } else {
+                alert('Error de conexión con el servidor');
+            }
+        } else {
+            alert('Error inesperado al procesar la solicitud');
+        }
     }
   };
 
@@ -183,12 +200,13 @@ export default function EvaluationPage() {
           />
         </div>
         <div className="campo">
-          <label>Nivel de HbA1c</label>
+          <label>Nivel de HbA1c
+            (Hemoglobina Glicosilada)</label>
           <input
             type="number"
             name="HbA1c_level"
             onChange={handleChange}
-            placeholder="Nivel de HbA1c"
+            placeholder="Nivel de HbA1c en %"
             step="0.1"
             required
           />

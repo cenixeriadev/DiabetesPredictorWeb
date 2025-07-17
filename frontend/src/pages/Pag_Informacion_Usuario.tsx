@@ -82,7 +82,7 @@ export default function Pag_Informacion_Usuario() {
         {
           username: formData.username,
           correo: formData.correo,
-          contrasena: formData.contrasena,
+          contrasena: formData.contrasena || null,
         },
         {
           withCredentials: true,

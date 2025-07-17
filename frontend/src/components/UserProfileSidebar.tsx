@@ -39,15 +39,6 @@ const UserProfileSidebar: React.FC<UserProfileSidebarProps> = ({ activePage }) =
       
       <div className="profileinfo-separator"></div>
       
-      <div className={`profileinfo-menu-item ${activePage === 'password' ? 'active' : ''}`}>
-        {activePage === 'password' ? (
-          'Cambiar contraseña'
-        ) : (
-          <Link to="/ResetPassword" className="profileinfo-link">
-            Cambiar contraseña
-          </Link>
-        )}
-      </div>
       
       <div className={`profileinfo-menu-item ${activePage === 'delete' ? 'active' : ''}`}>
         {activePage === 'delete' ? (

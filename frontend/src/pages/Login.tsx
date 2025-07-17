@@ -7,19 +7,29 @@ import '../styles/Login.css';
 const Login = () => {
     const { login, register } = useAuth();
 
-    const [formData, setFormData] = useState({
+    const [formDataR, setFormDataR] = useState({
         username: '',
         correo: '',
         contrasena: ''
     });
+    const [formDataL, setFormDataL] = useState({
+        username: '',
+        contrasena: ''
+    });// it's not clean this way, but it works for now
 
     const [isRegisterMode, setIsRegisterMode] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
+    const handleInputChangeL = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormDataL({
+            ...formDataL,
+            [e.target.name]: e.target.value
+        });
+    };
+    const handleInputChangeR = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormDataR({
+            ...formDataR,
             [e.target.name]: e.target.value
         });
     };
@@ -28,7 +38,7 @@ const Login = () => {
         e.preventDefault();
         setError(null);
         try {
-            const success = await login(formData.username, formData.contrasena);
+            const success = await login(formDataL.username, formDataL.contrasena);
             
             if (success) {
                 navigate('/Home');
@@ -50,13 +60,13 @@ const Login = () => {
         e.preventDefault();
         setError(null);
         try {
-            const success = await register(formData.username, formData.correo, formData.contrasena);
+            const success = await register(formDataR.username, formDataR.correo, formDataR.contrasena);
             
             if (success) {
                 alert('Registro exitoso. Ahora puedes iniciar sesión.');
                 setIsRegisterMode(false);
                 // Limpiar los campos después del registro exitoso
-                setFormData({
+                setFormDataR({
                     username: '',
                     correo: '',
                     contrasena: ''
@@ -94,8 +104,8 @@ const Login = () => {
                                 type="text"
                                 placeholder="Username"
                                 required
-                                value={formData.username}
-                                onChange={handleInputChange}
+                                value={formDataL.username}
+                                onChange={handleInputChangeL}
                             />
                             <i className="bx bxs-user"></i>
                         </div>
@@ -105,8 +115,8 @@ const Login = () => {
                                 type="password"
                                 placeholder="Password"
                                 required
-                                value={formData.contrasena}
-                                onChange={handleInputChange}
+                                value={formDataL.contrasena}
+                                onChange={handleInputChangeL}
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
@@ -133,8 +143,8 @@ const Login = () => {
                                 name="username"
                                 type="text" 
                                 placeholder="Username" 
-                                value={formData.username}
-                                onChange={handleInputChange}
+                                value={formDataR.username}
+                                onChange={handleInputChangeR}
                                 required
                             />
                             <i className="bx bxs-user"></i>
@@ -144,8 +154,8 @@ const Login = () => {
                                 name="correo"
                                 type="email" 
                                 placeholder="Correo" 
-                                value={formData.correo}
-                                onChange={handleInputChange}
+                                value={formDataR.correo}
+                                onChange={handleInputChangeR}
                                 required
                             />
                             <i className="bx bxs-envelope"></i>
@@ -155,8 +165,8 @@ const Login = () => {
                                 name="contrasena"
                                 type="password" 
                                 placeholder="Password" 
-                                value={formData.contrasena}
-                                onChange={handleInputChange}
+                                value={formDataR.contrasena}
+                                onChange={handleInputChangeR}
                                 required
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>

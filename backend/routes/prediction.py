@@ -89,9 +89,18 @@ def predict_diabetes():
         
     except ValidationError as e:
         db.session.rollback()
+        serializable_errors = []
+        for error in e.errors():
+            serializable_errors.append({
+                'loc': error['loc'],
+                'msg': error['msg'],
+                'type': error['type']
+            })
+        
         return jsonify({
             'error': 'Datos de entrada inválidos',
-            'detalle': e.errors()
+            'detalle': serializable_errors,
+            'message': 'Por favor verifica los datos ingresados'
         }), 400
     except Exception as e:
         db.session.rollback()

@@ -83,27 +83,37 @@ class PrediccionInput(BaseModel):
     blood_glucose_level: int
     
     @field_validator('blood_glucose_level')
-    def glucose_must_be_positive(cls, v):
+    def glucose_must_be_reasonable(cls, v):
         if v <= 0:
             raise ValueError('El nivel de glucosa en sangre debe ser positivo')
+        if v > 1000:  # Valores superiores a 1000 mg/dL son extremadamente raros
+            raise ValueError('El nivel de glucosa en sangre es demasiado alto (máximo 1000 mg/dL)')
         return v
     
     @field_validator('HbA1c_level')
-    def HbA1c_level_must_be_positive(cls, v):
+    def HbA1c_level_must_be_reasonable(cls, v):
         if v <= 0.0:
             raise ValueError('El nivel de HbA1c debe ser positivo')
+        if v > 20.0:  # Valores superiores a 20% son extremadamente altos
+            raise ValueError('El nivel de HbA1c es demasiado alto (máximo 20%)')
         return v
     
     @field_validator('bmi')
-    def bmi_must_be_positive(cls, v):
+    def bmi_must_be_reasonable(cls, v):
         if v <= 0.0:
             raise ValueError('El BMI debe ser positivo')
+        if v < 10.0:  # BMI por debajo de 10 es incompatible con la vida
+            raise ValueError('El BMI es demasiado bajo (mínimo 10)')
+        if v > 70.0:  # BMI por encima de 70 es extremadamente raro
+            raise ValueError('El BMI es demasiado alto (máximo 70)')
         return v
     
     @field_validator('age')
-    def age_must_be_positive(cls, v):
+    def age_must_be_reasonable(cls, v):
         if v <= 0.0:
             raise ValueError('La edad debe ser positiva')
+        if v > 120.0:  # Edad máxima razonable
+            raise ValueError('La edad es demasiado alta (máximo 120 años)')
         return v
 
 class PrediccionResponse(BaseModel):

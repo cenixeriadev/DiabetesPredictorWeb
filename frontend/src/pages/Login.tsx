@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import 'boxicons/css/boxicons.min.css';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Login.css';

@@ -6,7 +6,6 @@ import Footerprincipal from './components/footer';
 import Pag_Evaluacion from './pages/Pag_Evaluacion';
 import Pag_Cuestionario from './pages/Pag_Cuestionario';
 import Login from './pages/Login';
-import ResetPassword from './pages/Reset_Password';
 import ResultadoBajo from './components/resultados_cuestionario/resultado_bajo';
 import ResultadoAlto from './components/resultados_cuestionario/resultado_alto';
 import ResultadoLigero from './components/resultados_cuestionario/resultado_ligero';
@@ -32,7 +31,6 @@ export default function App() {
           <Route path="/ListaEvaluaciones" element={<ProtectedRoute><ListaEvaluaciones /></ProtectedRoute>} />
           <Route path="/Pag_Evaluacion" element={<ProtectedRoute><Pag_Evaluacion /></ProtectedRoute>} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/DeleteAccount" element={<ProtectedRoute><DeleteUsuario /></ProtectedRoute>} />
           <Route path="/Pag_Cuestionario" element={<ProtectedRoute><Pag_Cuestionario /></ProtectedRoute>} />
           <Route path="/resultado/bajo" element={<ProtectedRoute><ResultadoBajo /></ProtectedRoute>} />

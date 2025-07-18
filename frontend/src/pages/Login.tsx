@@ -120,9 +120,6 @@ const Login = () => {
                             />
                             <i className="bx bxs-lock-alt" style={{ color: 'black' }}></i>
                         </div>
-                        <div className="forgot-link">
-                            <Link to="/ResetPassword">Forgot your password?</Link>
-                        </div>
                         {error && <div className="error-message">{error}</div>}
                         <button type="submit" className="btn">Sign in</button>
                     </form>

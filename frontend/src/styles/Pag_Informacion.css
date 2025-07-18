@@ -317,6 +317,10 @@ body {
     .section-title {
         font-size: 2rem;
     }
+    .tools-section {
+        margin-top: 300px;
+        padding: 0%;
+    }
     
     .types-grid {
         grid-template-columns: 1fr;
@@ -332,14 +336,29 @@ body {
     }
     
     .hero-section {
-        padding: 50px 0;
+        padding: 50px 0%;
     }
     
-    .symptoms-section,
-    .types-section,
-    .management-section,
-    .tools-section,
+    .symptoms-section{
+        padding: 50px 0%;
+    }
+    .types-section{
+        padding:50px 0%;
+    }
+    .management-section{
+        padding:50px 0%;
+    }
+    .tools-section{
+        padding:50px 0%;
+    }
     .medical-section {
-        padding: 50px 0;
+        margin-top: 500px;
+        padding: 120px 0%;
     }
 }
+.tools-video {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+

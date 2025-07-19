@@ -37,7 +37,6 @@ export default function EvaluationPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      
       const numericFormData = {
         ...formData,
         age: parseFloat(formData.age),
@@ -54,36 +53,37 @@ export default function EvaluationPage() {
         },
       });
       setPredictionResult(response.data);
-        
     } catch (error) {
-        console.error("Error en la predicción:", error);
-        
-        if (axios.isAxiosError(error)) {
-            if (error.response) {
-                // Manejo de errores de validación (400)
-                if (error.response.status === 400 && error.response.data.detalle) {
-                    const errorDetails = error.response.data.detalle as Array<{
-                        loc: string[];
-                        msg: string;
-                    }>;
-                    
-                    const errorMessages = errorDetails.map(err => 
-                        `${err.loc.join('.')}: ${err.msg}`
-                    ).join('\n');
-                    
-                    alert(`Errores de validación:\n${errorMessages}`);
-                } else {
-                    // Otros errores
-                    alert(error.response.data.message || 
-                         error.response.data.error || 
-                         'Error desconocido');
-                }
-            } else {
-                alert('Error de conexión con el servidor');
-            }
+      console.error("Error en la predicción:", error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // Manejo de errores de validación (400)
+          if (error.response.status === 400 && error.response.data.detalle) {
+            const errorDetails = error.response.data.detalle as Array<{
+              loc: string[];
+              msg: string;
+            }>;
+
+            const errorMessages = errorDetails
+              .map((err) => `${err.loc.join(".")}: ${err.msg}`)
+              .join("\n");
+
+            alert(`Errores de validación:\n${errorMessages}`);
+          } else {
+            // Otros errores
+            alert(
+              error.response.data.message ||
+                error.response.data.error ||
+                "Error desconocido"
+            );
+          }
         } else {
-            alert('Error inesperado al procesar la solicitud');
+          alert("Error de conexión con el servidor");
         }
+      } else {
+        alert("Error inesperado al procesar la solicitud");
+      }
     }
   };
 
@@ -150,6 +150,7 @@ export default function EvaluationPage() {
             <option value="Male">Masculino</option>
             <option value="Other">Otro</option>
           </select>
+          <p>Selecciona el género con el que te identificas.</p>
         </div>
         <div className="campo">
           <label>Edad</label>
@@ -160,6 +161,7 @@ export default function EvaluationPage() {
             placeholder="Edad"
             required
           />
+          <p>Ingresa tu edad en años.</p>
         </div>
         <div className="campo">
           <label>Hipertensión</label>
@@ -168,6 +170,9 @@ export default function EvaluationPage() {
             <option value="Si">Sí</option>
             <option value="No">No</option>
           </select>
+          <p>
+            Indica si alguna vez te han diagnosticado presión arterial alta.
+          </p>
         </div>
         <div className="campo">
           <label>Enfermedad del corazón</label>
@@ -176,6 +181,7 @@ export default function EvaluationPage() {
             <option value="Si">Sí</option>
             <option value="No">No</option>
           </select>
+          <p>Indica si tienes o has tenido alguna enfermedad cardíaca.</p>
         </div>
         <div className="campo">
           <label>Historial de tabaquismo</label>
@@ -188,6 +194,7 @@ export default function EvaluationPage() {
             <option value="Never">Nunca</option>
             <option value="Not current">No actual</option>
           </select>
+          <p>Selecciona tu historial con el tabaquismo.</p>
         </div>
         <div className="campo">
           <label>Índice de Masa Corporal (BMI)</label>
@@ -198,10 +205,13 @@ export default function EvaluationPage() {
             placeholder="BMI"
             required
           />
+          <p>
+            Calcula tu BMI dividiendo tu peso en kilogramos entre tu altura en
+            metros al cuadrado. Por ejemplo: 70 kg / (1.75 m × 1.75 m) = 22.9
+          </p>
         </div>
         <div className="campo">
-          <label>Nivel de HbA1c
-            (Hemoglobina Glicosilada)</label>
+          <label>Nivel de HbA1c (Hemoglobina Glicosilada)</label>
           <input
             type="number"
             name="HbA1c_level"
@@ -210,6 +220,10 @@ export default function EvaluationPage() {
             step="0.1"
             required
           />
+          <p>
+            Indica tu nivel promedio de glucosa en sangre durante los últimos 3
+            meses.
+          </p>
         </div>
         <div className="campo">
           <label>Nivel de glucosa en sangre</label>
@@ -221,6 +235,7 @@ export default function EvaluationPage() {
             step="1"
             required
           />
+          <p>Indica tu nivel de glucosa en ayunas:</p>
         </div>
         <button type="submit">➜ Predecir</button>
       </form>

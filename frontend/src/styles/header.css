@@ -1,200 +1,210 @@
 nav a {
-    text-decoration: none;
-    margin: 15px;
-    color: black;
+  text-decoration: none;
+  margin: 15px;
+  color: black;
 }
 
 nav a:hover {
-    color: rgb(102, 55, 160);
+  color: rgb(102, 55, 160);
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 100;
-    display: flex;
-    margin: 0;
-    min-height: 90px;
-    justify-content: space-between;
-    align-items: center;
-    background: #4a6572;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+  display: flex;
+  margin: 0;
+  min-height: 90px;
+  justify-content: space-between;
+  align-items: center;
+  background: #4a6572;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .LogoContainer {
-    display: flex;
-    align-items: center;
-    margin-left: 10%;
-    gap: 12px;
-}
-
-.Logo {
-    color: rgb(47, 20, 79);
-    font-size: 32px;
-    text-shadow: 2px 2px 5px rgba(3, 3, 3, 0.447);
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+  gap: 12px;
 }
 
 .Titulo {
-    color: rgb(47, 20, 79);
-    font-size: 10px;
-    width: 250px;
-    word-break: break-word;
+  color: rgb(47, 20, 79);
+  font-size: 10px;
+  width: 250px;
+  word-break: break-word;
 }
 
 .MenuContainer {
-    color: rgb(47, 20, 79);
-    display: flex;
-    align-items: center;
-    margin-right: 10%;
-    margin-left: 8%;
+  color: rgb(47, 20, 79);
+  display: flex;
+  align-items: center;
+  margin-right: 10%;
+  margin-left: 8%;
 }
 
 .Menu {
-    color: rgb(47, 20, 79);
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  color: rgb(47, 20, 79);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .Login {
-    background-color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 10px;
-    margin-left: 10px;
-}
-
-.Login a {
-    color: white;
+  background: rgba(255, 255, 255, 0.1); /* Fondo tipo cristal */
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: none;
+  backdrop-filter: blur(4px); /* efecto de vidrio */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6); /* sombra negra como borde */
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .user-menu-container {
-    position: relative;
+  position: relative;
 }
 
 .user-name-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
 }
 
 .user-name-button:hover {
-    color: rgb(220, 220, 220);
+  color: rgb(220, 220, 220);
 }
 
 .user-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 220px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    overflow: hidden;
-    margin-top: 8px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 220px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  margin-top: 8px;
 }
 
 .user-dropdown-item {
-    padding: 12px 16px;
-    display: block;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.2s;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s;
 }
 
 .user-dropdown-item:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .user-dropdown-divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 4px 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 4px 0;
 }
 
 .user-dropdown-logout {
-    color: #e53e3e;
-    display: flex;
-    align-items: center;
+  color: #e53e3e;
+  display: flex;
+  align-items: center;
 }
 
 .user-dropdown-logout svg {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: black;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 20;
+  display: none;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 20;
 
-    align-self: center;
-    padding: 0;
-
+  align-self: center;
+  padding: 0;
 }
 
 @media (max-width: 800px) {
-    header {
-        flex-direction: column;
-        padding-bottom: 5px;
-        align-items: stretch;
-    }
-    .LogoContainer {
-        justify-content: center;
-        margin-left: 10px;
-    }
-    .Titulo {
-        font-size: 9px;
-        width: 90vw;
-        max-width: 320px;
-        text-align: center;
-    }
-    .MenuContainer {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background: #526f7d;
-        top: 60px;
-        left: 0;
-        right: 0;
-        z-index: 10;
-        padding: 1rem 0 0.5rem 0;
-        border-radius: 0 0 12px 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .MenuContainer.open {
-        display: flex;
-    }
-    .Menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        background: none;
-        position: static;
-        box-shadow: none;
-        padding: 0;
-    }
-    .Login {
-        display: block;
-        margin-top: 10px;
-        align-self: center;
-        background: rgba(0,0,0,0.95);
-    }
-    .menu-toggle {
-        display: block;
-        margin-top: 10px;
-    }
+  header {
+    flex-direction: column;
+    padding-bottom: 5px;
+    align-items: stretch;
+  }
+  .LogoContainer {
+    justify-content: center;
+    margin-left: 10px;
+  }
+  .Titulo {
+    font-size: 9px;
+    width: 90vw;
+    max-width: 320px;
+    text-align: center;
+  }
+  .MenuContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #526f7d;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 1rem 0 0.5rem 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  .MenuContainer.open {
+    display: flex;
+  }
+  .Menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+  }
+  .Login {
+    display: block;
+    margin-top: 10px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.95);
+  }
+  .menu-toggle {
+    display: block;
+    margin-top: 10px;
+  }
+}
+/*diseño extra (ignorar)*/
+
+.Login a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+/* Efecto hover: fondo oscuro fluido */
+.Login:hover {
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 px rgba(0, 0, 0, 0.9); /* sombra más intensa */
+}
+
+.Login:hover a {
+  color: white;
 }

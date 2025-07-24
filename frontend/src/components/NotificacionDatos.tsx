@@ -3,13 +3,12 @@ import React from "react";
 export default function NotificacionDatos() {
   return (
     <div className="notificacion-datos">
-      <h2>¡ADVERTENCIA!</h2>
+      <h2>¡Warning!</h2>
       <p>
-        Los datos proporcionados serán utilizados únicamente con fines de
-        evaluación académica.
+        The data provided will be used solely for academic evaluation purposes.
         <br />
-        Garantizamos que la información no será compartida con terceros ni usada
-        para otros propósitos.
+        We guarantee that the information will not be shared with third parties or used
+        for other purposes.
       </p>
     </div>
   );

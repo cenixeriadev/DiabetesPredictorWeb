@@ -14,36 +14,41 @@ interface EvaluacionItem {
   id_resultado: number;
 }
 
-// Función para formatear la fecha (ahora maneja timezone)
+// Función para formatear la fecha (usa configuración local del usuario)
 const formatearFecha = (fechaISO: string): string => {
-  const fecha = new Date(fechaISO);
-  // Asegurar que use la localización del navegador
-  return fecha.toLocaleDateString("es-ES", {
-    timeZone: "UTC", // Asume que el backend usa UTC
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
+  const fecha = new Date(fechaISO + 'T00:00:00Z'); // Agregar tiempo UTC para evitar cambios de zona horaria
+  return fecha.toLocaleDateString(undefined, { // undefined usa la configuración local del navegador
+    timeZone: 'UTC',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
   });
 };
 
-// Función para formatear la hora (más robusta)
+// Función para formatear la hora (convertir de UTC a hora local del usuario)
 const formatearHora = (horaISO: string): string => {
   try {
-    // Opción 1: Si viene como "HH:MM:SS"
+    // Si viene como "HH:MM:SS", crear una fecha UTC para convertir a hora local
     if (/^\d{2}:\d{2}:\d{2}$/.test(horaISO)) {
-      return horaISO.substring(0, 5); // Devuelve "HH:MM"
+      const fechaHoy = new Date().toISOString().split('T')[0]; // Fecha de hoy
+      const fechaCompleta = new Date(`${fechaHoy}T${horaISO}Z`); // Z indica UTC
+      
+      return fechaCompleta.toLocaleTimeString(undefined, { // undefined usa la configuración local del navegador
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
     }
-
-    // Opción 2: Si viene como ISO string (con 'T')
-    const date = new Date(`1970-01-01T${horaISO.split("T")[1]}`);
-    return date.toLocaleTimeString("es-ES", {
-      timeZone: "UTC",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
+    
+    // Si viene como ISO string completo
+    const date = new Date(horaISO);
+    return date.toLocaleTimeString(undefined, { // undefined usa la configuración local del navegador
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
     });
   } catch {
-    return "Hora inválida";
+    return 'Hora inválida';
   }
 };
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from pydantic import ValidationError
-from datetime import datetime
+from datetime import datetime, timezone
 from schemas.schemas import PrediccionInput, PrediccionResponse, CuestionarioInput
 from services.auth_service import AuthService
 from services.model_service import model_service
@@ -26,9 +26,10 @@ def predict_diabetes():
         prediction_data = PrediccionInput(**request.get_json())
         
         # Crear nuevo cuestionario
+        now_utc = datetime.now(timezone.utc)
         nuevo_cuestionario = Cuestionario(
-            fecha=datetime.now().date(),
-            hora=datetime.now().time(),
+            fecha= now_utc.date(),
+            hora=now_utc.time(),
             id_usuario=usuario_actual.id_usuario
         )
         db.session.add(nuevo_cuestionario)

@@ -23,11 +23,11 @@ function Pag_Informacion() {
     <section className="hero-section">
   <div className="hero-content">
     <div className="hero-text">
-      <h1 className="hero-title">¿Qué es la diabetes?</h1>
+      <h1 className="hero-title">What is diabetes?</h1>
       <p className="hero-description">
-        La diabetes es una enfermedad crónica que aparece cuando el páncreas no produce suficiente insulina 
-        o cuando el organismo no utiliza eficazmente la insulina que produce. Conoce más sobre esta condición 
-        y cómo manejarla adecuadamente.
+        Diabetes is a chronic disease that occurs when the pancreas does not produce enough insulin 
+        or when the body does not effectively use the insulin it produces. Learn more about this condition 
+        and how to manage it properly.
       </p>
     </div>
     <div className="hero-media">
@@ -43,16 +43,16 @@ function Pag_Informacion() {
     {/* <!-- Symptoms Section --> */}
     <section className="symptoms-section">
         <div className="container">
-            <h2 className="section-title">Signos y síntomas</h2>
+            <h2 className="section-title">Signs and symptoms</h2>
             <div className="content-row">
                 <div className="text-content">
-                    <p>Los síntomas de la diabetes pueden desarrollarse gradualmente y a menudo pasan desapercibidos. 
-                    Es importante conocer las señales de alerta para buscar atención médica oportuna.</p>
+                    <p>The symptoms of diabetes can develop gradually and often go unnoticed. 
+                      It is important to know the warning signs so that you can seek timely medical attention.</p>
                     <ul className="symptoms-list">
-                        <li>Sed excesiva</li>
-                        <li>Micción frecuente</li>
-                        <li>Fatiga extrema</li>
-                        <li>Visión borrosa</li>
+                        <li>Be excessive</li>
+                        <li>Frequent urination</li>
+                        <li>Extreme fatigue</li>
+                        <li>Blurred vision</li>
                     </ul>
                 </div>
                 <div className="image-content">

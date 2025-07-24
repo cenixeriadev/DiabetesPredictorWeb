@@ -11,8 +11,7 @@ export default function Headerprincipal() {
     <header>
       <div className="LogoContainer">
         <h3 className="Titulo">
-          Modelo Predictivo Web para Estimar la Probabilidad de Desarrollo de
-          Diabetes Tipo 2
+          Web Predictive Model to Estimate the Probability of Developing Type 2 Diabetes
         </h3>
       </div>
       <button
@@ -23,13 +22,13 @@ export default function Headerprincipal() {
       <div className={`MenuContainer ${menuOpen ? "open" : ""}`}>
         <nav className="Menu">
           <Link to="/Home" onClick={() => setMenuOpen(false)}>
-            Inicio
+            Home
           </Link>
           <Link to="./Pag_Informacion" onClick={() => setMenuOpen(false)}>
-            Información
+            Information
           </Link>
           <Link to="/Pag_Evaluacion" onClick={() => setMenuOpen(false)}>
-            Evaluacion
+            Evaluation
           </Link>
         </nav>
         <nav className="Login">
@@ -39,7 +38,7 @@ export default function Headerprincipal() {
             </Link>
           ) : (
             <Link to="/login" onClick={() => setMenuOpen(false)}>
-              Login/Registro
+              Login/Register
             </Link>
           )}
         </nav>

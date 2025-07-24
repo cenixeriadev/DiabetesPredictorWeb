@@ -18,12 +18,12 @@ export default function Home() {
         />
         <div className="contenido_texto1_home">
           <h2 className="subtitulo1">
-            Conocer la diabetes es el primer paso para controlarlo
+            Understanding diabetes is the first step to managing it.
           </h2>
           <p className="parrafo1">
-            Entender la diabetes no solo es informarse, es tomar el control de
-            tu salud, prevenir complicaciones y vivir con responsabilidad y
-            esperanza.
+            Understanding diabetes is not just about being informed, it is about taking control of
+            your health, preventing complications, and living responsibly and
+            hopefully.
           </p>
         </div>
       </section>
@@ -46,15 +46,10 @@ export default function Home() {
         <div className="contenido_texto2_home">
           <h2 className="Subtitulo2">¿Qué es diabetes tipo 2?</h2>
           <p className="Parrafo2">
-            La diabetes tipo 2 es una enfermedad crónica que afecta la manera en
-            que el cuerpo metaboliza el azúcar (glucosa), una fuente importante
-            de energía. A diferencia de la diabetes tipo 1, donde el cuerpo no
-            produce insulina, en la tipo 2 el cuerpo no la utiliza adecuadamente
-            (resistencia a la insulina) o no produce suficiente. Esta condición
-            puede desarrollarse lentamente y durante años no presentar síntomas
-            evidentes, lo que hace fundamental su detección temprana para evitar
-            complicaciones graves como problemas cardíacos, renales, oculares y
-            neurológicos.
+            Type 2 diabetes is a long-term disease that affects how the body processes sugar (glucose), 
+            which is an important source of energy. Unlike type 1 diabetes, where the body fails to produce insulin,
+            in type 2 diabetes, the body either does not use insulin properly or does not make enough of it. This
+            condition can develop gradually and may not show clear symptoms for years. Early detection is crucial to prevent serious complications such as heart, kidney, eye, and nerve issues.
           </p>
         </div>
       </section>
@@ -63,9 +58,9 @@ export default function Home() {
         <p className="parrafo3">
           <span className="destacado">Nuestro objetivo</span>
           <br></br>
-          Ofrecer una herramienta preventiva e interactiva que ayude a las
-          personas a conocer su riesgo de desarrollar diabetes tipo 2,
-          promoviendo la detección temprana y hábitos de vida saludables.
+          To offer a preventive and interactive tool that helps people understand their risk of developing type 2 diabetes,
+          promoting early detection and healthy lifestyle habits.
+          To raise awareness about diabetes and its prevention, promoting healthy lifestyle habits.
         </p>
         <img
           className="img4_vida_sana_contenedor_3_home"
@@ -85,32 +80,32 @@ export default function Home() {
         <div className="contenido_texto3_home">
           <h2 className="subtitulo3">¿Quienes somos?</h2>
           <p className="parrafo4">
-            Somos un grupo de estudiantes comprometidos con la salud pública y
-            la tecnología, que hemos desarrollado esta plataforma como parte de
-            un proyecto académico. Nuestra motivación nace del deseo de aplicar
-            nuestros conocimientos en informática para generar un impacto
-            positivo en la sociedad.
+            We are a group of students committed to public health and
+            technology, who have developed this platform as part of
+            an academic project. Our motivation stems from the desire to apply
+            our knowledge of computer science to generate a positive impact
+            on society.
           </p>
         </div>
       </section>
 
       <section className="contenedor_quinto_home">
         <h2 className="subtitulo4">
-          ¿Qué ofrecemos y cómo funciona la predicción?
+          What do we offer and how does the prediction work?
         </h2>
         <p className="parrafo5">
-          Ofrecemos una herramienta digital que analiza tus datos personales y
-          hábitos de vida para estimar el nivel de riesgo de desarrollar
-          diabetes tipo 2. El sistema funciona a través de un cuestionario
-          breve, en el que se ingresan datos como:{" "}
+          We offer a digital tool that analyzes your personal data and
+          lifestyle habits to estimate your risk of developing
+          type 2 diabetes. The system works through a short questionnaire
+          in which you enter data such as:{" "}
         </p>
         <ul className="datos_encuesta">
-          <li>Edad</li>
-          <li>Peso y altura (para calcular el IMC)</li>
-          <li>Actividad física</li>
-          <li>Presión arterial</li>
-          <li>Historial familiar</li>
-          <li>Niveles de glucosa</li>
+          <li>Age</li>
+          <li>Weight and height (to calculate BMI)</li>
+          <li>Physical activity</li>
+          <li>Blood pressure</li>
+          <li>Family history</li>
+          <li>Glucose levels</li>
         </ul>
         <p className="parrafo6">
           Con base en estos datos, el sistema utiliza un modelo de predicción

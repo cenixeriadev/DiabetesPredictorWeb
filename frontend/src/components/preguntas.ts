@@ -4,7 +4,7 @@ export interface Pregunta {
 }
 
 const preguntas: Pregunta[] = [
-    { texto: "¿Consumes frutas y verduras diariamente?", invertida: true },
+    { texto: "Do you eat fruits and vegetables daily?", invertida: true },
     { texto: "¿Consumes alimentos o bebidas con alto contenido de azúcar (como gaseosas, pasteles, dulces)?", invertida: false },
     { texto: "¿Consumes alimentos ultraprocesados (como snacks, embutidos, comidas rápidas) con frecuencia?", invertida: false },
     { texto: "¿Realizas actividad física (como caminar, correr o ir al gimnasio) al menos 3 veces por semana?", invertida: true },

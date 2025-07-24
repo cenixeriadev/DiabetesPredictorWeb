@@ -12,14 +12,14 @@ export default function Pregunta({ indice, valor, setValor }: PreguntaProps) {
 
     return (
     <div className="pregunta">
-        <h2>PREGUNTA {indice + 1} de {preguntas.length}</h2>
+        <h2>QUESTION {indice + 1} of {preguntas.length}</h2>
         <p>{pregunta.texto}</p>
         <div className="face-row">
         {[0, 1, 2, 3, 4].map(val => (
             <div className="face-column" key={val}>
             <img src={`/faces/${val}.png`} alt={`valor ${val}`} />
             <span>
-                {["Totalmente en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Totalmente de acuerdo"][val]}
+                {["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"][val]}
             </span>
             </div>
         ))}
@@ -31,7 +31,7 @@ export default function Pregunta({ indice, valor, setValor }: PreguntaProps) {
         value={valor ?? ""}
         onChange={(e) => setValor(parseInt(e.target.value))}
         />
-        {valor === null && <p style={{ color: "red" }}>Selecciona una alternativa por favor :)</p>}
+        {valor === null && <p style={{ color: "red" }}>Please select an option :)</p>}
     </div>
     );
 }

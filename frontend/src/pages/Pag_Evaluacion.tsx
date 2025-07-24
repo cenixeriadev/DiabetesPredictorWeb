@@ -47,18 +47,18 @@ export default function EvaluationPage() {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const apiUrl = `${API_URL}/api/v1/prediccion`;
       const response = await axios.post(apiUrl, numericFormData, {
-        withCredentials: true, // Importante para enviar cookies
+        withCredentials: true, // Important for sending cookies
         headers: {
           "Content-Type": "application/json",
         },
       });
       setPredictionResult(response.data);
     } catch (error) {
-      console.error("Error en la predicción:", error);
+      console.error("Prediction error:", error);
 
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          // Manejo de errores de validación (400)
+          // Validation error handling (400)
           if (error.response.status === 400 && error.response.data.detalle) {
             const errorDetails = error.response.data.detalle as Array<{
               loc: string[];
@@ -69,20 +69,20 @@ export default function EvaluationPage() {
               .map((err) => `${err.loc.join(".")}: ${err.msg}`)
               .join("\n");
 
-            alert(`Errores de validación:\n${errorMessages}`);
+            alert(`Validation errors:\n${errorMessages}`);
           } else {
-            // Otros errores
+            // Other errors
             alert(
               error.response.data.message ||
                 error.response.data.error ||
-                "Error desconocido"
+                "Unknown error"
             );
           }
         } else {
-          alert("Error de conexión con el servidor");
+          alert("Connection error with the server");
         }
       } else {
-        alert("Error inesperado al procesar la solicitud");
+        alert("Unexpected error processing the request");
       }
     }
   };
@@ -91,7 +91,7 @@ export default function EvaluationPage() {
     labels: ["No Diabetes", "Diabetes"],
     datasets: [
       {
-        label: "Probabilidad (%)",
+        label: "Probability (%)",
         data: predictionResult
           ? [
               predictionResult.probabilidad_clase_0 * 100,
@@ -108,7 +108,7 @@ export default function EvaluationPage() {
     ],
   };
 
-  // Opciones para el gráfico
+  // Chart options
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -132,7 +132,7 @@ export default function EvaluationPage() {
         max: 100,
         title: {
           display: true,
-          text: "Probabilidad (%)",
+          text: "Probability (%)",
         },
       },
     },
@@ -143,61 +143,61 @@ export default function EvaluationPage() {
       <NotificacionDatos />
       <form className="formulario" onSubmit={handleSubmit}>
         <div className="campo">
-          <label>Género</label>
+          <label>Gender</label>
           <select name="gender" onChange={handleChange} required>
-            <option value="">Seleccione</option>
-            <option value="Female">Femenino</option>
-            <option value="Male">Masculino</option>
-            <option value="Other">Otro</option>
+            <option value="">Select</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
           </select>
-          <p>Selecciona el género con el que te identificas.</p>
+          <p>Select the gender you identify with.</p>
         </div>
         <div className="campo">
-          <label>Edad</label>
+          <label>Age</label>
           <input
             type="number"
             name="age"
             onChange={handleChange}
-            placeholder="Edad"
+            placeholder="Age"
             required
           />
-          <p>Ingresa tu edad en años.</p>
+          <p>Enter your age in years.</p>
         </div>
         <div className="campo">
-          <label>Hipertensión</label>
+          <label>Hypertension</label>
           <select name="hypertension" onChange={handleChange} required>
-            <option value="">Seleccione</option>
-            <option value="Si">Sí</option>
+            <option value="">Select</option>
+            <option value="Si">Yes</option>
             <option value="No">No</option>
           </select>
           <p>
-            Indica si alguna vez te han diagnosticado presión arterial alta.
+            Indicate if you have ever been diagnosed with high blood pressure.
           </p>
         </div>
         <div className="campo">
-          <label>Enfermedad del corazón</label>
+          <label>Heart Disease</label>
           <select name="heart_disease" onChange={handleChange} required>
-            <option value="">Seleccione</option>
-            <option value="Si">Sí</option>
+            <option value="">Select</option>
+            <option value="Si">Yes</option>
             <option value="No">No</option>
           </select>
-          <p>Indica si tienes o has tenido alguna enfermedad cardíaca.</p>
+          <p>Indicate if you have or have had any heart disease.</p>
         </div>
         <div className="campo">
-          <label>Historial de tabaquismo</label>
+          <label>Smoking History</label>
           <select name="smoking_history" onChange={handleChange} required>
-            <option value="">Seleccione</option>
-            <option value="No Info">Sin información</option>
-            <option value="Current">Actual</option>
-            <option value="Ever">Alguna vez</option>
-            <option value="Former">Ex fumador</option>
-            <option value="Never">Nunca</option>
-            <option value="Not current">No actual</option>
+            <option value="">Select</option>
+            <option value="No Info">No information</option>
+            <option value="Current">Current</option>
+            <option value="Ever">Ever</option>
+            <option value="Former">Former smoker</option>
+            <option value="Never">Never</option>
+            <option value="Not current">Not current</option>
           </select>
-          <p>Selecciona tu historial con el tabaquismo.</p>
+          <p>Select your smoking history.</p>
         </div>
         <div className="campo">
-          <label>Índice de Masa Corporal (BMI)</label>
+          <label>Body Mass Index (BMI)</label>
           <input
             type="number"
             name="bmi"
@@ -206,88 +206,84 @@ export default function EvaluationPage() {
             required
           />
           <p>
-            Calcula tu BMI dividiendo tu peso en kilogramos entre tu altura en
-            metros al cuadrado. Por ejemplo: 70 kg / (1.75 m × 1.75 m) = 22.9
+            Calculate your BMI by dividing your weight in kilograms by your height in meters squared. For example: 70 kg / (1.75 m × 1.75 m) = 22.9
           </p>
         </div>
         <div className="campo">
-          <label>Nivel de HbA1c (Hemoglobina Glicosilada)</label>
+          <label>HbA1c Level (Glycated Hemoglobin)</label>
           <input
             type="number"
             name="HbA1c_level"
             onChange={handleChange}
-            placeholder="Nivel de HbA1c en %"
+            placeholder="HbA1c level in %"
             step="0.1"
             required
           />
           <p>
-            Indica tu nivel promedio de glucosa en sangre durante los últimos 3
-            meses.
+            Indicate your average blood glucose level over the last 3 months.
           </p>
         </div>
         <div className="campo">
-          <label>Nivel de glucosa en sangre</label>
+          <label>Blood Glucose Level</label>
           <input
             type="number"
             name="blood_glucose_level"
             onChange={handleChange}
-            placeholder="Nivel de glucosa"
+            placeholder="Glucose level"
             step="1"
             required
           />
-          <p>Indica tu nivel de glucosa en ayunas:</p>
+          <p>Indicate your fasting blood glucose level:</p>
         </div>
-        <button type="submit">➜ Predecir</button>
+        <button type="submit">➜ Predict</button>
       </form>
 
       {predictionResult && (
         <div className="resultado">
-          <h2>Resultado de la Predicción</h2>
+          <h2>Prediction Result</h2>
           <div className="chart-container">
             <Bar data={data} options={options} />
           </div>
 
           <div className="prediccion-info">
-            <h3>Interpretación:</h3>
+            <h3>Interpretation:</h3>
             <p>
-              La predicción indica que hay un{" "}
+              The prediction indicates there is a{" "}
               <strong>
                 {(predictionResult.probabilidad_clase_1 * 100).toFixed(2)}%
               </strong>{" "}
-              de probabilidad de desarrollar diabetes tipo 2, y un{" "}
+              probability of developing type 2 diabetes, and a{" "}
               <strong>
                 {(predictionResult.probabilidad_clase_0 * 100).toFixed(2)}%
               </strong>{" "}
-              de probabilidad de no desarrollarla.
+              probability of not developing it.
             </p>
 
             {predictionResult.prediccion === "Diabetes" ? (
               <div className="alerta alerta-positiva">
                 <p>
-                  <strong>Resultado: Riesgo alto</strong>
+                  <strong>Result: High risk</strong>
                 </p>
                 <p>
-                  Se recomienda consultar con un médico para realizar exámenes
-                  adicionales.
+                  It is recommended to consult a doctor for further tests.
                 </p>
                 <div className="acciones-adicionales">
                   <Link to="/Pag_Cuestionario" className="btn-cuestionario">
-                    Realizar cuestionario psicológico adicional
+                    Take additional psychological questionnaire
                   </Link>
                 </div>
               </div>
             ) : (
               <div className="alerta alerta-negativa">
                 <p>
-                  <strong>Resultado: Riesgo bajo</strong>
+                  <strong>Result: Low risk</strong>
                 </p>
                 <p>
-                  Se recomienda mantener hábitos saludables y realizar chequeos
-                  periódicos.
+                  It is recommended to maintain healthy habits and have regular check-ups.
                 </p>
                 <div className="acciones-adicionales">
                   <Link to="/Pag_Cuestionario" className="btn-cuestionario">
-                    Realizar cuestionario sobre hábitos saludables
+                    Take questionnaire about healthy habits
                   </Link>
                 </div>
               </div>

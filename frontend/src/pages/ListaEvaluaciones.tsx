@@ -24,41 +24,23 @@ const formatearFecha = (fechaISO: string): string => {
     year: 'numeric'
   });
 };
-
-// Función para formatear la hora (convertir de UTC a hora local del usuario)
-const formatearHora = (horaISO: string): string => {
+// NUEVA FUNCIÓN - Usa la fecha Y hora del backend
+const formatearHoraLocal = (fechaISO: string, horaISO: string): string => {
   try {
-    // Si viene como "HH:MM:SS" (formato ISO time)
-    if (/^\d{2}:\d{2}:\d{2}$/.test(horaISO)) {
-      const fechaHoy = new Date().toISOString().split('T')[0]; // Fecha de hoy
-      const fechaCompleta = new Date(`${fechaHoy}T${horaISO}Z`); // Z indica UTC
-      
-      return fechaCompleta.toLocaleTimeString(undefined, {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
-    }
+    // Combina fecha y hora en formato ISO UTC (ej: "2023-10-05T14:30:00Z")
+    const dateTimeUTC = `${fechaISO}T${horaISO}Z`;
+    const date = new Date(dateTimeUTC);
     
-    // Si viene como ISO datetime completo (YYYY-MM-DDTHH:MM:SS)
-    if (horaISO.includes('T')) {
-      const date = new Date(horaISO + 'Z'); // Agregar Z para indicar UTC
-      return date.toLocaleTimeString(undefined, {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
-    }
-    
-    // Fallback: tratar como string de hora simple
-    const date = new Date(`1970-01-01T${horaISO}Z`);
+    // Convierte a hora local del usuario
     return date.toLocaleTimeString(undefined, {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
+      hour12: false,
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // Usa zona horaria del usuario
     });
-  } catch {
-    return 'Hora inválida';
+  } catch (error) {
+    console.error("Error formateando hora:", error);
+    return horaISO; // Fallback
   }
 };
 
@@ -180,7 +162,7 @@ export default function ListaEvaluaciones() {
                   <label>Hora:</label>
                   <input
                     type="text"
-                    value={formatearHora(evaluacion.hora)}
+                    value={formatearHoraLocal(evaluacion.fecha , evaluacion.hora)}
                     readOnly
                   />
                 </div>

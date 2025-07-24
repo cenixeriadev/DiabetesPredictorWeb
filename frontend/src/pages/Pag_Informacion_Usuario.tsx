@@ -189,7 +189,11 @@ export default function Pag_Informacion_Usuario() {
                       onChange={handleInputChange}
                       readOnly={!isEditing}
                     />
-                    <span className="profileinfo-form-icon">🔒</span>
+                    <span className="profileinfo-form-iconlock">🔒</span>
+                    <div className="password-info-message">
+                      Tu contraseña no es visible pero sí editable debido a su
+                      seguridad
+                    </div>
                   </div>
                 </div>
                 {isEditing && (

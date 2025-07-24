@@ -28,21 +28,31 @@ const formatearFecha = (fechaISO: string): string => {
 // Función para formatear la hora (convertir de UTC a hora local del usuario)
 const formatearHora = (horaISO: string): string => {
   try {
-    // Si viene como "HH:MM:SS", crear una fecha UTC para convertir a hora local
+    // Si viene como "HH:MM:SS" (formato ISO time)
     if (/^\d{2}:\d{2}:\d{2}$/.test(horaISO)) {
       const fechaHoy = new Date().toISOString().split('T')[0]; // Fecha de hoy
       const fechaCompleta = new Date(`${fechaHoy}T${horaISO}Z`); // Z indica UTC
       
-      return fechaCompleta.toLocaleTimeString(undefined, { // undefined usa la configuración local del navegador
+      return fechaCompleta.toLocaleTimeString(undefined, {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
       });
     }
     
-    // Si viene como ISO string completo
-    const date = new Date(horaISO);
-    return date.toLocaleTimeString(undefined, { // undefined usa la configuración local del navegador
+    // Si viene como ISO datetime completo (YYYY-MM-DDTHH:MM:SS)
+    if (horaISO.includes('T')) {
+      const date = new Date(horaISO + 'Z'); // Agregar Z para indicar UTC
+      return date.toLocaleTimeString(undefined, {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+    }
+    
+    // Fallback: tratar como string de hora simple
+    const date = new Date(`1970-01-01T${horaISO}Z`);
+    return date.toLocaleTimeString(undefined, {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false
@@ -98,18 +108,11 @@ export default function ListaEvaluaciones() {
     fetchEvaluaciones();
   }, []);
 
-  // Ordenar evaluaciones del más antiguo al más reciente
-  const evaluacionesOrdenadas = [...evaluaciones].sort((a, b) => {
-    const fechaHoraA = new Date(`${a.fecha}T${a.hora}`);
-    const fechaHoraB = new Date(`${b.fecha}T${b.hora}`);
-    return fechaHoraA.getTime() - fechaHoraB.getTime();
-  });
-
   // Calculamos el número total de páginas
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Obtenemos los elementos para la página actual
-  const currentItems = evaluacionesOrdenadas.slice(
+  // Obtenemos los elementos para la página actual (el backend ya los ordena)
+  const currentItems = evaluaciones.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );

@@ -26,10 +26,10 @@ def predict_diabetes():
         prediction_data = PrediccionInput(**request.get_json())
         
         # Crear nuevo cuestionario
-        now_utc = datetime.now(timezone.utc)
+        ahora_utc = datetime.now(timezone.utc)
         nuevo_cuestionario = Cuestionario(
-            fecha= now_utc.date(),
-            hora=now_utc.time(),
+            fecha=ahora_utc.date(),
+            hora=ahora_utc.time(),
             id_usuario=usuario_actual.id_usuario
         )
         db.session.add(nuevo_cuestionario)
@@ -136,7 +136,7 @@ def get_prediction_history():
             historial.append({
                 'id_cuestionario': cuestionario.id_cuestionario,
                 'fecha': cuestionario.fecha.isoformat(),
-                'hora':  cuestionario.hora.strftime('%H:%M:%S'),
+                'hora': cuestionario.hora.isoformat(),  # Consistente con el formato ISO
                 'prediccion': resultado.prediccion,
                 'id_resultado': resultado.id_resultado
             })

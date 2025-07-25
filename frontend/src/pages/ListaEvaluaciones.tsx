@@ -47,12 +47,16 @@ const formatearHoraLocal = (fechaISO: string, horaISO: string): string => {
 // Función para convertir la predicción numérica a texto descriptivo
 const getNivelRiesgo = (prediccion: string): string => {
   switch (prediccion) {
-    case "No Diabetes":
+    case "Riesgo Bajo":
       return "Bajo";
-    case "Diabetes":
+    case "Riesgo Moderado":
+      return "Moderado";
+    case "Riesgo Alto":
       return "Alto";
+    case "Riesgo Muy Alto":
+      return "Muy Alto";
     default:
-      return "No disponible";
+      return prediccion; // Para casos como "Desconocido"
   }
 };
 

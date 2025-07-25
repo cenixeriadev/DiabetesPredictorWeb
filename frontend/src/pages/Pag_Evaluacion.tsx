@@ -137,6 +137,46 @@ export default function EvaluationPage() {
       },
     },
   };
+const getRiskInfo = (riskLevel: string) => {
+  switch (riskLevel) {
+    case "Riesgo Bajo":
+      return {
+        label: "Low risk",
+        className: "alerta alerta-negativa",
+        advice: "It is recommended to maintain healthy habits and have regular check-ups.",
+        button: "Take questionnaire about healthy habits",
+      };
+    case "Riesgo Moderado":
+      return {
+        label: "Moderate risk",
+        className: "alerta alerta-moderada",
+        advice: "Consider consulting a healthcare professional for advice and monitoring.",
+        button: "Take lifestyle and health questionnaire",
+      };
+    case "Riesgo Alto":
+      return {
+        label: "High risk",
+        className: "alerta alerta-positiva",
+        advice: "It is recommended to consult a doctor for further tests.",
+        button: "Take additional psychological questionnaire",
+      };
+    case "Riesgo Muy Alto":
+      return {
+        label: "Very high risk",
+        className: "alerta alerta-muy-alta",
+        advice: "Immediate medical attention is strongly recommended.",
+        button: "Take urgent health questionnaire",
+      };
+    default:
+      return {
+        label: "Unknown",
+        className: "alerta alerta-desconocida",
+        advice: "Risk level could not be determined. Please try again.",
+        button: "Try again or contact support",
+      };
+  }
+};
+
 
   return (
     <>
@@ -259,35 +299,23 @@ export default function EvaluationPage() {
               probability of not developing it.
             </p>
 
-            {predictionResult.prediccion === "Diabetes" ? (
-              <div className="alerta alerta-positiva">
-                <p>
-                  <strong>Result: High risk</strong>
-                </p>
-                <p>
-                  It is recommended to consult a doctor for further tests.
-                </p>
-                <div className="acciones-adicionales">
-                  <Link to="/Pag_Cuestionario" className="btn-cuestionario">
-                    Take additional psychological questionnaire
-                  </Link>
+            {/* Mostrar mensaje según el nivel de riesgo */}
+            {(() => {
+              const riskInfo = getRiskInfo(predictionResult.prediccion);
+              return (
+                <div className={riskInfo.className}>
+                  <p>
+                    <strong>Result: {riskInfo.label}</strong>
+                  </p>
+                  <p>{riskInfo.advice}</p>
+                  <div className="acciones-adicionales">
+                    <Link to="/Pag_Cuestionario" className="btn-cuestionario">
+                      {riskInfo.button}
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="alerta alerta-negativa">
-                <p>
-                  <strong>Result: Low risk</strong>
-                </p>
-                <p>
-                  It is recommended to maintain healthy habits and have regular check-ups.
-                </p>
-                <div className="acciones-adicionales">
-                  <Link to="/Pag_Cuestionario" className="btn-cuestionario">
-                    Take questionnaire about healthy habits
-                  </Link>
-                </div>
-              </div>
-            )}
+              );
+            })()}
           </div>
         </div>
       )}

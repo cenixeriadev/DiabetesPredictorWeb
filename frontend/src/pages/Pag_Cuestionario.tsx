@@ -17,11 +17,11 @@ const imagenes = [
 ];
 
 const etiquetas = [
-  "Totalmente en desacuerdo",
-  "En desacuerdo",
+  "Strongly disagree",
+  "Disagree",
   "Neutral",
-  "De acuerdo",
-  "Totalmente de acuerdo",
+  "Agree",
+  "Strongly agree",
 ];
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
   const [fade, setFade] = useState<string>("fade-in");
   const navigate = useNavigate();
 
-  // Esta función actualiza la respuesta seleccionada
+  // This function updates the selected answer
   const actualizarRespuesta = (valor: string) => {
     const nuevas = [...respuestas];
     nuevas[index] = parseInt(valor);
@@ -84,7 +84,7 @@ function App() {
     <div className="container2">
       <main className={`question-container ${fade}`}>
         <h2>
-          PREGUNTA {index + 1} de {(preguntas as Pregunta[]).length}
+          Question {index + 1} of {(preguntas as Pregunta[]).length}
         </h2>
         <p>{(preguntas as Pregunta[])[index].texto}</p>
 
@@ -105,16 +105,16 @@ function App() {
             value={respuestas[index] ?? ""}
             onChange={(e) => actualizarRespuesta(e.target.value)}
           />
-          {error && <p id="error">Selecciona una alternativa por favor :)</p>}
+          {error && <p id="error">Please select an option :)</p>}
         </div>
       </main>
 
       <div className="botones-navegacion">
-        {index > 0 && <button onClick={anterior}>← Anterior</button>}
+        {index > 0 && <button onClick={anterior}>← Previous</button>}
         <button onClick={siguiente}>
           {index < (preguntas as Pregunta[]).length - 1
-            ? "Siguiente →"
-            : "Ver resultados →"}
+            ? "Next →"
+            : "See results →"}
         </button>
       </div>
     </div>

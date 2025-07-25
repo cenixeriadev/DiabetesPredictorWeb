@@ -174,18 +174,22 @@ class ModelService:
             print("Advertencia: No se aplicó escalado (scaler no cargado)")
         
         return features_df
-    
-    def _interpret_prediction(self, prediction) -> str:
+
+    def _interpret_prediction(self, probability: float) -> str:
         """
         Interpreta la predicción del modelo en un formato legible.
         Ajusta según tu modelo específico.
         """
-        if isinstance(prediction, (int, np.integer)):
-            return "Diabetes" if prediction == 1 else "No Diabetes"
-        elif isinstance(prediction, (float, np.floating)):
-            return "Diabetes" if prediction > 0.5 else "No Diabetes"
+        if probability is None:
+            return "Desconocido"
+        if probability < 0.25:
+            return "Riesgo Bajo"
+        elif probability < 0.5:
+            return "Riesgo Moderado"
+        elif probability < 0.75:
+            return "Riesgo Alto"
         else:
-            return str(prediction)
+            return "Riesgo Muy Alto"
     
     def get_model_info(self) -> Dict[str, Any]:
         """
